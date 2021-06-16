@@ -22,6 +22,7 @@ Here are some ideas to get you started:
 
 ### 🌱 I’m currently ...
 - Parsuing my studies at [University of Dar es Salaam](www.udsm.ac.tz)
+- Living in Dar es Salaam, Tanzania.
 - Exploring the good stuffs.
 
 ### 💬 Ask me about ...
