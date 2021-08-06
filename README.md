@@ -28,17 +28,19 @@ Here are some ideas to get you started:
 ### 💬 Ask me about ...
 - Anything you find relevant to the context
 
+
+## My Contributions
+
+![contributions](https://github.com/mrblack360/mrblack360/blob/output/github-contribution-grid-snake.gif)
+
+<br>
+
 ## My github stats:
 
 ![Just for showoff(GitHub stats)](https://github-readme-stats.vercel.app/api?username=mrblack360&show_icons=true&theme=blueberry&count_private=true&hide_rank=false)
 
 <br>
 
-## My Contributions
-
-![contributions](https://github.com/YOUR_USERNAME/YOUR_USERNAME/blob/output/github-contribution-grid-snake.gif)
-
-<br>
 
 ## Trophies
 [![trophy](https://github-profile-trophy.vercel.app/?username=mrblack360)](https://github.com/ryo-ma/github-profile-trophy)
