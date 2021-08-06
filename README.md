@@ -29,7 +29,7 @@ Here are some ideas to get you started:
 - Anything you find relevant to the context
 
 
-## Contributions
+## My Contributions
 
 ![contributions](https://github.com/mrblack360/mrblack360/blob/output/github-contribution-grid-snake.gif)
 
