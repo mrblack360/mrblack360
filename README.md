@@ -29,7 +29,7 @@ Here are some ideas to get you started:
 - Anything you find relevant to the context
 
 
-## My Contributions
+## Contributions
 
 ![contributions](https://github.com/mrblack360/mrblack360/blob/output/github-contribution-grid-snake.gif)
 
@@ -37,7 +37,7 @@ Here are some ideas to get you started:
 
 ## My github stats:
 
-![Just for showoff(GitHub stats)](https://github-readme-stats.vercel.app/api?username=mrblack360&show_icons=true&theme=blueberry&count_private=true&hide_rank=false)
+![Statistics](https://github-readme-stats.vercel.app/api?username=mrblack360&show_icons=true&theme=blueberry&count_private=true&hide_rank=false)
 
 <br>
 
