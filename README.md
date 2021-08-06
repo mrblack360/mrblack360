@@ -34,6 +34,12 @@ Here are some ideas to get you started:
 
 <br>
 
+## My Contributions
+
+![contributions](https://github.com/YOUR_USERNAME/YOUR_USERNAME/blob/output/github-contribution-grid-snake.gif)
+
+<br>
+
 ## Trophies
 [![trophy](https://github-profile-trophy.vercel.app/?username=mrblack360)](https://github.com/ryo-ma/github-profile-trophy)
 
