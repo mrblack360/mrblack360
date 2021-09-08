@@ -1177,6 +1177,11 @@ a:hover {
   line-height: 25px;
   overflow: hidden;
 }
+.card-img .img-fluid {
+  height: 250px !important;
+  width: 100%;
+  object-fit: cover !important;
+}
 
 .card-blog .card-category {
   display: inline-block;
@@ -1203,6 +1208,7 @@ a:hover {
 
 .card-blog .card-description {
   color: #4e4e4e;
+  text-align: justify;
 }
 
 .card-blog .post-author {
