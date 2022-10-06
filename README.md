@@ -1,6 +1,6 @@
 ### Hello World👋
 
-My name is Maswi, Mussa Raphael. A software developer based in Dar es Salaam - Tanzania.
+My name is [Maswi, Mussa Raphael](https://www.linkedin.com/in/maswi-mussa-raphael-047a26b4/). A software developer based in Dar es Salaam - Tanzania.
 
 <hr>
  
