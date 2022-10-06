@@ -5,7 +5,7 @@ My name is Maswi, Mussa Raphael. A software developer based in Dar es Salaam - T
 <hr>
  
 ### 🔭 I’m currently working on ...
-- Multiple projects using [Java](https://www.java.com), [Typescript](https://www.typescriptlang.org/), [JavaScript](https://www.javascript.com/), [Dart](https://dart.dev/) among others.
+- Multiple projects using [Python](https://www.python.org/), [Typescript](https://www.typescriptlang.org/), [JavaScript](https://www.javascript.com/), [Dart](https://dart.dev/), [Java](https://www.java.com), [Shell](https://www.shellscript.sh/) among others.
 
 ### 🌱 I’m currently ...
 
