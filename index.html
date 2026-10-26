@@ -245,6 +245,23 @@
     .wrap { padding-left: 5vw; padding-right: 5vw; }
     section { position: relative; }
 
+    .wipe {
+      position: fixed;
+      inset: 0;
+      z-index: 140;
+      background: var(--accent);
+      clip-path: inset(0 0 100% 0);
+      pointer-events: none;
+    }
+
+    .roll { position: relative; display: inline-block; overflow: hidden; vertical-align: top; }
+    .roll > span {
+      display: block;
+      transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .roll > .r2 { position: absolute; left: 0; top: 100%; color: var(--accent); }
+    a:hover > .roll > span { transform: translateY(-100%); }
+
     .sec-head {
       display: flex;
       align-items: baseline;
@@ -293,9 +310,21 @@
       z-index: 0;
       pointer-events: none;
     }
-    .hero > *:not(.hero-dots):not(.spin-badge) { position: relative; z-index: 1; }
+    .hero > *:not(.hero-dots):not(.spin-badge):not(.trail-img) { position: relative; z-index: 1; }
     .hero h1 .ch { display: inline-block; will-change: transform; }
     .hero h1 [data-chars] { white-space: nowrap; }
+    .trail-img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 0;
+      width: 170px;
+      height: 220px;
+      object-fit: cover;
+      border-radius: 6px;
+      pointer-events: none;
+      will-change: transform, opacity;
+    }
     .hero-eyebrow {
       display: flex;
       align-items: center;
@@ -740,6 +769,12 @@
       .gal-sec { overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
       .gal-sec::-webkit-scrollbar { display: none; }
     }
+    @media (min-width: 861px) {
+      .gal-sec { cursor: grab; }
+      .gal-sec.dragging { cursor: grabbing; }
+      .gal-sec.dragging .gal-card { pointer-events: none; }
+      .gal-track { user-select: none; will-change: transform; }
+    }
 
     /* ---------- Contact ---------- */
     .contact {
@@ -896,9 +931,10 @@
       -webkit-text-stroke: 1.5px var(--stroke-faint);
       transform: translateY(0.12em);
       user-select: none;
-      transition: color 0.6s, -webkit-text-stroke-color 0.6s;
+      background-image: radial-gradient(240px circle at var(--sx, -999px) var(--sy, -999px), var(--accent) 0%, rgba(77, 122, 255, 0.4) 45%, transparent 72%);
+      -webkit-background-clip: text;
+      background-clip: text;
     }
-    .foot-name:hover { color: var(--accent); -webkit-text-stroke-color: var(--accent); }
     .foot-bottom {
       display: flex;
       justify-content: space-between;
@@ -958,6 +994,7 @@
 
   <div class="cursor-dot" aria-hidden="true"></div>
   <div class="cursor-ring" aria-hidden="true"><span class="cursor-label">View</span></div>
+  <div class="wipe" aria-hidden="true"></div>
 
   <header class="topbar">
     <a class="brand" href="#top">Maswi MR<sup>®</sup></a>
@@ -1197,7 +1234,7 @@
       <div class="wrap">
         <div class="sec-head">
           <h2>Off the <span class="serif">keyboard</span></h2>
-          <span class="sec-no">05 — Gallery</span>
+          <span class="sec-no">05 — Gallery · drag →</span>
         </div>
       </div>
       <div class="gal-sec">
@@ -1360,11 +1397,42 @@
         else { menuTl.reverse(); if (lenis) lenis.start(); }
       };
       menuBtn.addEventListener("click", () => setMenu(!menuOpen));
+
+      // Curtain wipe: cover, jump instantly behind it, reveal
+      const wipe = document.querySelector(".wipe");
+      let wiping = false;
+      const goWithWipe = (sel) => {
+        const el = document.querySelector(sel);
+        if (!el || wiping) return;
+        if (reduced) {
+          if (menuOpen) setMenu(false);
+          scrollToEl(sel);
+          return;
+        }
+        wiping = true;
+        gsap.timeline({ onComplete: () => (wiping = false) })
+          .to(wipe, { clipPath: "inset(0% 0 0% 0)", duration: 0.55, ease: "power4.inOut" })
+          .add(() => {
+            if (menuOpen) {
+              menuOpen = false;
+              document.body.classList.remove("menu-open");
+              menuBtn.setAttribute("aria-expanded", "false");
+              menu.setAttribute("aria-hidden", "true");
+              menuWord.textContent = "Menu";
+              menuTl.pause(0);
+              if (lenis) lenis.start();
+            }
+            if (lenis) lenis.scrollTo(el, { immediate: true, force: true });
+            else el.scrollIntoView();
+            ScrollTrigger.refresh();
+          })
+          .to(wipe, { clipPath: "inset(100% 0 0% 0)", duration: 0.6, ease: "power4.inOut" }, "+=0.1")
+          .set(wipe, { clipPath: "inset(0 0 100% 0)" });
+      };
       menuLinks.forEach((a) =>
         a.addEventListener("click", (e) => {
           e.preventDefault();
-          setMenu(false);
-          setTimeout(() => scrollToEl(a.getAttribute("href")), 500);
+          goWithWipe(a.getAttribute("href"));
         })
       );
       document.querySelectorAll('a[href^="#"]:not(.menu-link)').forEach((a) =>
@@ -1391,8 +1459,12 @@
           el.addEventListener("pointerenter", () => ring.classList.add("is-hover"));
           el.addEventListener("pointerleave", () => ring.classList.remove("is-hover"));
         });
-        document.querySelectorAll(".proj-row, .gal-card").forEach((el) => {
-          el.addEventListener("pointerenter", () => ring.classList.add("is-view"));
+        const label = ring.querySelector(".cursor-label");
+        document.querySelectorAll(".proj-row, .gal-sec").forEach((el) => {
+          el.addEventListener("pointerenter", () => {
+            label.textContent = el.classList.contains("gal-sec") ? "Drag" : "View";
+            ring.classList.add("is-view");
+          });
           el.addEventListener("pointerleave", () => ring.classList.remove("is-view"));
         });
       }
@@ -1506,18 +1578,113 @@
         });
       }
 
-      // Horizontal gallery
+      // Draggable gallery with momentum
       const galSec = document.querySelector(".gal-sec");
       const galTrack = document.querySelector(".gal-track");
-      if (desktop && !reduced && galSec && galTrack) {
-        const getX = () => -(galTrack.scrollWidth - innerWidth);
-        gsap.to(galTrack, {
-          x: getX, ease: "none",
-          scrollTrigger: {
-            trigger: galSec, start: "top 15%", pin: true, scrub: 1,
-            end: () => "+=" + (galTrack.scrollWidth - innerWidth),
-            invalidateOnRefresh: true
-          }
+      if (desktop && galSec && galTrack) {
+        let x = 0, vel = 0, startX = 0, grabX = 0, down = false, raf2 = null, lastMX = 0, lastT = 0;
+        const minX = () => Math.min(0, innerWidth - galTrack.scrollWidth);
+        const render = () => gsap.set(galTrack, { x });
+        const momentum = () => {
+          vel *= 0.94;
+          x = gsap.utils.clamp(minX(), 0, x + vel);
+          render();
+          if (Math.abs(vel) > 0.2 && !down) raf2 = requestAnimationFrame(momentum);
+          else raf2 = null;
+        };
+        galSec.addEventListener("pointerdown", (e) => {
+          down = true;
+          galSec.classList.add("dragging");
+          startX = x; grabX = e.clientX; lastMX = e.clientX; lastT = performance.now();
+          vel = 0;
+          if (raf2) { cancelAnimationFrame(raf2); raf2 = null; }
+          galSec.setPointerCapture(e.pointerId);
+        });
+        galSec.addEventListener("pointermove", (e) => {
+          if (!down) return;
+          const now = performance.now();
+          const dt = Math.max(now - lastT, 1);
+          vel = ((e.clientX - lastMX) / dt) * 16;
+          lastMX = e.clientX; lastT = now;
+          x = gsap.utils.clamp(minX(), 0, startX + (e.clientX - grabX));
+          render();
+        });
+        const release = () => {
+          if (!down) return;
+          down = false;
+          galSec.classList.remove("dragging");
+          if (!reduced && Math.abs(vel) > 0.5 && !raf2) raf2 = requestAnimationFrame(momentum);
+        };
+        galSec.addEventListener("pointerup", release);
+        galSec.addEventListener("pointercancel", release);
+      }
+
+      // Hero image trail
+      if (fine && !reduced) {
+        const heroSec = document.querySelector(".hero");
+        const TRAIL = ["class-photo.jpg", "crs-photo.jpg", "speech.jpg", "singo-photo.jpg", "charity.jpg", "tss.jpg"].map((f) => "assets/img/" + f);
+        TRAIL.forEach((src) => { const im = new Image(); im.src = src; });
+        let ti = 0, tx = -9999, ty = -9999, live = 0;
+        heroSec.addEventListener("pointermove", (e) => {
+          const r = heroSec.getBoundingClientRect();
+          const px = e.clientX - r.left, py = e.clientY - r.top;
+          if (Math.hypot(px - tx, py - ty) < 110 || live > 10) return;
+          tx = px; ty = py; live++;
+          const img = document.createElement("img");
+          img.src = TRAIL[ti++ % TRAIL.length];
+          img.className = "trail-img";
+          img.alt = "";
+          heroSec.insertBefore(img, heroSec.children[1]);
+          gsap.fromTo(img,
+            { x: px - 85, y: py - 110, scale: 0.4, rotate: gsap.utils.random(-14, 14), opacity: 0 },
+            { scale: 1, opacity: 0.9, duration: 0.35, ease: "power3.out" }
+          );
+          gsap.to(img, {
+            y: "+=40", scale: 0.75, opacity: 0, duration: 0.6, delay: 0.35, ease: "power2.in",
+            onComplete: () => { img.remove(); live--; }
+          });
+        });
+      }
+
+      // Scramble-decode on project names
+      if (fine && !reduced) {
+        const GLYPHS = "!<>-_\\/[]{}—=+*^?#01";
+        document.querySelectorAll(".proj-row h3").forEach((h) => {
+          const original = h.textContent;
+          let timer = null;
+          h.closest(".proj-row").addEventListener("pointerenter", () => {
+            if (timer) clearInterval(timer);
+            let frame = 0;
+            const total = original.length * 2.5;
+            timer = setInterval(() => {
+              h.textContent = original.split("").map((c, i) =>
+                c === " " ? " " :
+                i < frame / 2.5 ? c :
+                GLYPHS[(Math.random() * GLYPHS.length) | 0]
+              ).join("");
+              if (++frame > total) { clearInterval(timer); timer = null; h.textContent = original; }
+            }, 24);
+          });
+        });
+      }
+
+      // Rolling link labels
+      document.querySelectorAll(".foot-top .col a, .c-meta a").forEach((a) => {
+        const t = a.textContent;
+        a.innerHTML = `<span class="roll"><span class="r1">${t}</span><span class="r2">${t}</span></span>`;
+      });
+
+      // Footer name spotlight
+      if (fine && !reduced) {
+        const fn = document.querySelector(".foot-name");
+        fn.addEventListener("pointermove", (e) => {
+          const r = fn.getBoundingClientRect();
+          fn.style.setProperty("--sx", e.clientX - r.left + "px");
+          fn.style.setProperty("--sy", e.clientY - r.top + "px");
+        });
+        fn.addEventListener("pointerleave", () => {
+          fn.style.setProperty("--sx", "-999px");
+          fn.style.setProperty("--sy", "-999px");
         });
       }
 
