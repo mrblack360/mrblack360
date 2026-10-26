@@ -3,915 +3,1234 @@
 
 <head>
   <meta charset="utf-8" />
-  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-  <meta name="description" content="Maswi, Mussa Raphael - Portfolio">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Maswi, Mussa Raphael — Software Developer based in Dar es Salaam, Tanzania. Full-stack development, DHIS2, GeoNode and revenue assurance." />
   <meta name="robots" content="index, follow" />
+  <meta name="theme-color" content="#07070d" />
 
-  <title>Maswi MR - Portfolio</title>
+  <meta property="og:title" content="Maswi MR — Software Developer" />
+  <meta property="og:description" content="Full-stack developer in Dar es Salaam, Tanzania. DHIS2 expert, GeoNode expert, revenue assurance (CARA)." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://www.maswimr.website/" />
+  <meta property="og:image" content="https://www.maswimr.website/assets/img/maswi.jpg" />
 
-  <!-- Favicons -->
+  <title>Maswi MR — Software Developer</title>
+
   <link href="assets/img/favicon.png" rel="icon" />
   <link href="assets/img/favicon.png" rel="apple-touch-icon" />
 
-  <!-- Vendor CSS Files -->
-  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
-  <link href="assets/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
-  <link href="assets/vendor/ionicons/css/ionicons.min.css" rel="stylesheet" />
-  <link href="assets/vendor/owl.carousel/assets/owl.carousel.min.css" rel="stylesheet" />
-  <link href="assets/vendor/venobox/venobox.css" rel="stylesheet" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
 
-  <!-- Template Main CSS File -->
-  <link href="assets/css/style.css" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #07070d;
+      --bg-soft: #0c0c16;
+      --card: rgba(255, 255, 255, 0.04);
+      --card-border: rgba(255, 255, 255, 0.08);
+      --text: #eef0f6;
+      --muted: #9aa0b4;
+      --accent-1: #6366f1;
+      --accent-2: #22d3ee;
+      --accent-3: #a855f7;
+      --gradient: linear-gradient(100deg, var(--accent-1), var(--accent-2) 50%, var(--accent-3));
+      --radius: 20px;
+      --font-display: "Space Grotesk", sans-serif;
+      --font-body: "Inter", sans-serif;
+      --font-mono: "JetBrains Mono", monospace;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-body);
+      font-size: 16px;
+      line-height: 1.65;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    ::selection { background: rgba(99, 102, 241, 0.4); color: #fff; }
+
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
+
+    /* ---------- Ambient background ---------- */
+    .aurora {
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+      overflow: hidden;
+      pointer-events: none;
+    }
+    .aurora span {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(110px);
+      opacity: 0.35;
+      animation: drift 26s ease-in-out infinite alternate;
+    }
+    .aurora span:nth-child(1) { width: 520px; height: 520px; background: #4338ca; top: -160px; left: -120px; }
+    .aurora span:nth-child(2) { width: 460px; height: 460px; background: #0e7490; top: 30%; right: -160px; animation-delay: -8s; }
+    .aurora span:nth-child(3) { width: 420px; height: 420px; background: #7e22ce; bottom: -140px; left: 30%; animation-delay: -16s; }
+    @keyframes drift {
+      0%   { transform: translate(0, 0) scale(1); }
+      50%  { transform: translate(60px, -40px) scale(1.15); }
+      100% { transform: translate(-50px, 50px) scale(0.95); }
+    }
+
+    .grain {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+      opacity: 0.5;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
+    }
+
+    /* ---------- Scroll progress ---------- */
+    .scroll-progress {
+      position: fixed;
+      top: 0; left: 0;
+      height: 3px;
+      width: 0;
+      background: var(--gradient);
+      z-index: 200;
+    }
+
+    /* ---------- Navbar ---------- */
+    header {
+      position: fixed;
+      top: 18px;
+      left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: center;
+      padding: 0 16px;
+    }
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(12, 12, 22, 0.6);
+      border: 1px solid var(--card-border);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      max-width: 100%;
+    }
+    .nav-logo {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 17px;
+      padding: 6px 14px 6px 8px;
+      white-space: nowrap;
+    }
+    .nav-logo em {
+      font-style: normal;
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .nav-links { display: flex; gap: 2px; list-style: none; }
+    .nav-links a {
+      display: block;
+      padding: 7px 14px;
+      border-radius: 999px;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--muted);
+      transition: color 0.25s, background 0.25s;
+      white-space: nowrap;
+    }
+    .nav-links a:hover, .nav-links a.active { color: var(--text); background: rgba(255, 255, 255, 0.07); }
+    .nav-cta {
+      margin-left: 6px;
+      padding: 8px 18px;
+      border-radius: 999px;
+      background: var(--gradient);
+      color: #fff;
+      font-size: 14px;
+      font-weight: 600;
+      white-space: nowrap;
+      transition: transform 0.25s, box-shadow 0.25s;
+    }
+    .nav-cta:hover { transform: translateY(-1px); box-shadow: 0 8px 26px rgba(99, 102, 241, 0.45); }
+
+    .nav-burger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: 0;
+      padding: 10px;
+      cursor: pointer;
+    }
+    .nav-burger span {
+      width: 22px; height: 2px;
+      background: var(--text);
+      border-radius: 2px;
+      transition: transform 0.3s, opacity 0.3s;
+    }
+
+    .mobile-menu {
+      position: fixed;
+      inset: 0;
+      z-index: 90;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      background: rgba(7, 7, 13, 0.92);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s, visibility 0.3s;
+    }
+    .mobile-menu.open { opacity: 1; visibility: visible; }
+    .mobile-menu a {
+      font-family: var(--font-display);
+      font-size: 28px;
+      font-weight: 600;
+      color: var(--muted);
+      transition: color 0.25s;
+    }
+    .mobile-menu a:hover { color: var(--text); }
+
+    body.menu-open { overflow: hidden; }
+    body.menu-open .nav-burger span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    body.menu-open .nav-burger span:nth-child(2) { opacity: 0; }
+    body.menu-open .nav-burger span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    @media (max-width: 920px) {
+      .nav-links, .nav-cta { display: none; }
+      .nav-burger { display: flex; }
+      .nav { width: 100%; justify-content: space-between; }
+    }
+
+    /* ---------- Layout ---------- */
+    .container { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
+    section { padding: 110px 0 0; }
+
+    .section-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-mono);
+      font-size: 13px;
+      color: var(--accent-2);
+      padding: 6px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(34, 211, 238, 0.25);
+      background: rgba(34, 211, 238, 0.06);
+      margin-bottom: 18px;
+    }
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(30px, 4.5vw, 44px);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 12px;
+    }
+    .section-sub { color: var(--muted); max-width: 560px; margin-bottom: 48px; }
+
+    /* ---------- Reveal animations ---------- */
+    .reveal {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .reveal.in { opacity: 1; transform: none; }
+    .reveal[data-delay="1"] { transition-delay: 0.1s; }
+    .reveal[data-delay="2"] { transition-delay: 0.2s; }
+    .reveal[data-delay="3"] { transition-delay: 0.3s; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .reveal { opacity: 1; transform: none; transition: none; }
+      .aurora span, .marquee-track { animation: none !important; }
+      html { scroll-behavior: auto; }
+    }
+
+    /* ---------- Hero ---------- */
+    .hero {
+      min-height: 100svh;
+      display: flex;
+      align-items: center;
+      padding: 140px 0 60px;
+    }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.25fr 0.75fr;
+      gap: 48px;
+      align-items: center;
+    }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 13.5px;
+      font-weight: 500;
+      color: var(--muted);
+      padding: 8px 16px;
+      border-radius: 999px;
+      border: 1px solid var(--card-border);
+      background: var(--card);
+      margin-bottom: 26px;
+    }
+    .hero-badge .dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: #34d399;
+      box-shadow: 0 0 0 0 rgba(52, 211, 153, 0.6);
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(52, 211, 153, 0.55); }
+      70% { box-shadow: 0 0 0 9px rgba(52, 211, 153, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(52, 211, 153, 0); }
+    }
+    .hero h1 {
+      font-family: var(--font-display);
+      font-size: clamp(42px, 7vw, 76px);
+      font-weight: 700;
+      line-height: 1.04;
+      letter-spacing: -0.03em;
+      margin-bottom: 20px;
+    }
+    .hero h1 .grad {
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .hero-role {
+      font-family: var(--font-mono);
+      font-size: clamp(15px, 2vw, 19px);
+      color: var(--muted);
+      margin-bottom: 22px;
+      min-height: 1.6em;
+    }
+    .hero-role .typed { color: var(--accent-2); }
+    .hero-role .caret {
+      display: inline-block;
+      width: 9px;
+      margin-left: 2px;
+      background: var(--accent-2);
+      animation: blink 1s step-end infinite;
+    }
+    @keyframes blink { 50% { opacity: 0; } }
+    .hero-desc { color: var(--muted); max-width: 520px; margin-bottom: 34px; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 14px; align-items: center; }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      padding: 13px 26px;
+      border-radius: 999px;
+      font-weight: 600;
+      font-size: 15px;
+      transition: transform 0.25s, box-shadow 0.25s, background 0.25s, border-color 0.25s;
+    }
+    .btn-primary {
+      background: var(--gradient);
+      color: #fff;
+      box-shadow: 0 8px 30px rgba(99, 102, 241, 0.35);
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 14px 38px rgba(99, 102, 241, 0.5); }
+    .btn-ghost {
+      border: 1px solid var(--card-border);
+      background: var(--card);
+      color: var(--text);
+    }
+    .btn-ghost:hover { transform: translateY(-2px); border-color: rgba(255, 255, 255, 0.22); }
+
+    .hero-socials { display: flex; gap: 10px; margin-top: 38px; }
+    .icon-link {
+      width: 42px; height: 42px;
+      display: grid;
+      place-items: center;
+      border-radius: 12px;
+      border: 1px solid var(--card-border);
+      background: var(--card);
+      color: var(--muted);
+      transition: color 0.25s, transform 0.25s, border-color 0.25s;
+    }
+    .icon-link:hover { color: var(--text); transform: translateY(-3px); border-color: rgba(255, 255, 255, 0.25); }
+    .icon-link svg { width: 19px; height: 19px; fill: currentColor; }
+
+    .hero-portrait { position: relative; justify-self: center; }
+    .portrait-ring {
+      position: relative;
+      width: min(340px, 72vw);
+      aspect-ratio: 1;
+      border-radius: 50%;
+      padding: 6px;
+      background: conic-gradient(from var(--spin, 0deg), var(--accent-1), var(--accent-2), var(--accent-3), var(--accent-1));
+      animation: spin 9s linear infinite;
+    }
+    @property --spin { syntax: "<angle>"; initial-value: 0deg; inherits: false; }
+    @keyframes spin { to { --spin: 360deg; } }
+    .portrait-ring::after {
+      content: "";
+      position: absolute;
+      inset: -26px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(99, 102, 241, 0.3), transparent 70%);
+      z-index: -1;
+    }
+    .portrait-ring img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 6px solid var(--bg);
+    }
+    .float-chip {
+      position: absolute;
+      padding: 9px 16px;
+      border-radius: 14px;
+      background: rgba(12, 12, 22, 0.8);
+      border: 1px solid var(--card-border);
+      backdrop-filter: blur(10px);
+      font-family: var(--font-mono);
+      font-size: 12.5px;
+      white-space: nowrap;
+      animation: floaty 5s ease-in-out infinite;
+    }
+    .float-chip.c1 { top: 8%; left: -12%; color: var(--accent-2); }
+    .float-chip.c2 { bottom: 14%; right: -14%; color: var(--accent-3); animation-delay: -2.5s; }
+    @keyframes floaty {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-12px); }
+    }
+
+    @media (max-width: 860px) {
+      .hero-grid { grid-template-columns: 1fr; gap: 56px; }
+      .hero-portrait { order: -1; }
+      .portrait-ring { width: min(250px, 62vw); }
+      .float-chip.c1 { left: -4%; }
+      .float-chip.c2 { right: -4%; }
+    }
+
+    /* ---------- Marquee ---------- */
+    .marquee {
+      margin-top: 90px;
+      padding: 18px 0;
+      border-top: 1px solid var(--card-border);
+      border-bottom: 1px solid var(--card-border);
+      overflow: hidden;
+      -webkit-mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+      mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+    }
+    .marquee-track {
+      display: flex;
+      gap: 44px;
+      width: max-content;
+      animation: scroll-x 30s linear infinite;
+    }
+    .marquee-track span {
+      font-family: var(--font-display);
+      font-size: 17px;
+      font-weight: 500;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: 44px;
+      white-space: nowrap;
+    }
+    .marquee-track span::after { content: "✦"; color: var(--accent-1); font-size: 13px; }
+    @keyframes scroll-x { to { transform: translateX(-50%); } }
+
+    /* ---------- Stats ---------- */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+    }
+    .stat-card {
+      padding: 30px 24px;
+      border-radius: var(--radius);
+      border: 1px solid var(--card-border);
+      background: var(--card);
+      text-align: center;
+    }
+    .stat-num {
+      font-family: var(--font-display);
+      font-size: clamp(34px, 4.5vw, 48px);
+      font-weight: 700;
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .stat-label { color: var(--muted); font-size: 14px; margin-top: 4px; }
+    @media (max-width: 760px) { .stats-grid { grid-template-columns: repeat(2, 1fr); } }
+
+    /* ---------- Bento / About ---------- */
+    .bento {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+    .bento-card {
+      padding: 30px;
+      border-radius: var(--radius);
+      border: 1px solid var(--card-border);
+      background: var(--card);
+      position: relative;
+      overflow: hidden;
+      transition: border-color 0.3s, transform 0.3s;
+    }
+    .bento-card:hover { border-color: rgba(255, 255, 255, 0.18); transform: translateY(-4px); }
+    .bento-card.wide { grid-column: span 2; }
+    .bento-card h3 {
+      font-family: var(--font-display);
+      font-size: 20px;
+      margin-bottom: 12px;
+    }
+    .bento-card p { color: var(--muted); font-size: 15px; }
+    .bento-icon {
+      width: 46px; height: 46px;
+      border-radius: 13px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, rgba(99, 102, 241, 0.2), rgba(34, 211, 238, 0.15));
+      border: 1px solid rgba(99, 102, 241, 0.3);
+      margin-bottom: 18px;
+      font-size: 21px;
+    }
+    .chip-row { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 16px; }
+    .chip {
+      font-family: var(--font-mono);
+      font-size: 12.5px;
+      padding: 6px 13px;
+      border-radius: 999px;
+      border: 1px solid var(--card-border);
+      background: rgba(255, 255, 255, 0.03);
+      color: var(--muted);
+      transition: color 0.25s, border-color 0.25s;
+    }
+    .chip:hover { color: var(--accent-2); border-color: rgba(34, 211, 238, 0.4); }
+    @media (max-width: 860px) {
+      .bento { grid-template-columns: 1fr; }
+      .bento-card.wide { grid-column: span 1; }
+    }
+
+    /* ---------- Timeline ---------- */
+    .timeline { position: relative; padding-left: 34px; }
+    .timeline::before {
+      content: "";
+      position: absolute;
+      left: 8px; top: 6px; bottom: 6px;
+      width: 2px;
+      background: linear-gradient(180deg, var(--accent-1), var(--accent-2), var(--accent-3));
+      opacity: 0.5;
+    }
+    .tl-item { position: relative; padding-bottom: 42px; }
+    .tl-item:last-child { padding-bottom: 0; }
+    .tl-item::before {
+      content: "";
+      position: absolute;
+      left: -31px; top: 8px;
+      width: 12px; height: 12px;
+      border-radius: 50%;
+      background: var(--bg);
+      border: 3px solid var(--accent-2);
+      box-shadow: 0 0 14px rgba(34, 211, 238, 0.55);
+    }
+    .tl-card {
+      padding: 26px 28px;
+      border-radius: var(--radius);
+      border: 1px solid var(--card-border);
+      background: var(--card);
+      transition: border-color 0.3s, transform 0.3s;
+    }
+    .tl-card:hover { border-color: rgba(255, 255, 255, 0.18); transform: translateX(6px); }
+    .tl-head { display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: baseline; justify-content: space-between; margin-bottom: 6px; }
+    .tl-card h3 { font-family: var(--font-display); font-size: 20px; }
+    .tl-date {
+      font-family: var(--font-mono);
+      font-size: 12.5px;
+      color: var(--accent-2);
+      padding: 4px 12px;
+      border-radius: 999px;
+      background: rgba(34, 211, 238, 0.08);
+      border: 1px solid rgba(34, 211, 238, 0.2);
+      white-space: nowrap;
+    }
+    .tl-role { color: var(--accent-3); font-weight: 600; font-size: 14.5px; margin-bottom: 8px; }
+    .tl-card p { color: var(--muted); font-size: 15px; }
+    .tl-card a.tl-link { color: var(--muted); font-size: 13.5px; display: inline-flex; align-items: center; gap: 5px; margin-top: 12px; transition: color 0.25s; }
+    .tl-card a.tl-link:hover { color: var(--accent-2); }
+
+    /* ---------- Education cards ---------- */
+    .edu-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .edu-card {
+      padding: 28px;
+      border-radius: var(--radius);
+      border: 1px solid var(--card-border);
+      background: var(--card);
+      transition: border-color 0.3s, transform 0.3s;
+    }
+    .edu-card:hover { border-color: rgba(255, 255, 255, 0.18); transform: translateY(-5px); }
+    .edu-logo {
+      width: 58px; height: 58px;
+      border-radius: 14px;
+      background: #fff;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      margin-bottom: 20px;
+    }
+    .edu-logo img { width: 100%; height: 100%; object-fit: contain; padding: 7px; }
+    .edu-card h3 { font-family: var(--font-display); font-size: 18px; margin-bottom: 6px; }
+    .edu-card .edu-course { color: var(--accent-2); font-size: 14px; font-weight: 600; }
+    .edu-card .edu-date { font-family: var(--font-mono); color: var(--muted); font-size: 12.5px; margin-top: 8px; }
+    @media (max-width: 860px) { .edu-grid { grid-template-columns: 1fr; } }
+
+    /* ---------- Projects ---------- */
+    .proj-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+    .proj-card {
+      position: relative;
+      padding: 32px;
+      border-radius: var(--radius);
+      border: 1px solid var(--card-border);
+      background: var(--card);
+      overflow: hidden;
+      transition: border-color 0.3s, transform 0.3s;
+    }
+    .proj-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(500px circle at var(--mx, 50%) var(--my, 50%), rgba(99, 102, 241, 0.14), transparent 45%);
+      opacity: 0;
+      transition: opacity 0.35s;
+      pointer-events: none;
+    }
+    .proj-card:hover::before { opacity: 1; }
+    .proj-card:hover { border-color: rgba(99, 102, 241, 0.45); transform: translateY(-5px); }
+    .proj-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; }
+    .proj-logo {
+      width: 54px; height: 54px;
+      border-radius: 14px;
+      overflow: hidden;
+      background: #fff;
+    }
+    .proj-logo img { width: 100%; height: 100%; object-fit: cover; }
+    .proj-logo-tile {
+      background: linear-gradient(135deg, rgba(99, 102, 241, 0.35), rgba(34, 211, 238, 0.3));
+      border: 1px solid rgba(99, 102, 241, 0.4);
+      display: grid;
+      place-items: center;
+      font-size: 24px;
+    }
+    .proj-arrow {
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      border: 1px solid var(--card-border);
+      color: var(--muted);
+      transition: transform 0.3s, color 0.3s, border-color 0.3s, background 0.3s;
+    }
+    .proj-card:hover .proj-arrow {
+      transform: rotate(-45deg);
+      color: #fff;
+      background: var(--accent-1);
+      border-color: var(--accent-1);
+    }
+    .proj-card h3 { font-family: var(--font-display); font-size: 22px; margin-bottom: 8px; }
+    .proj-card p { color: var(--muted); font-size: 14.5px; }
+    .proj-url { font-family: var(--font-mono); font-size: 12.5px; color: var(--accent-2); margin-top: 16px; display: block; }
+    @media (max-width: 760px) { .proj-grid { grid-template-columns: 1fr; } }
+
+    /* ---------- Gallery ---------- */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+    .gal-item {
+      position: relative;
+      border-radius: 16px;
+      overflow: hidden;
+      aspect-ratio: 4 / 3;
+      border: 1px solid var(--card-border);
+    }
+    .gal-item img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .gal-item:hover img { transform: scale(1.07); }
+    .gal-cap {
+      position: absolute;
+      inset: auto 0 0 0;
+      padding: 40px 18px 14px;
+      background: linear-gradient(180deg, transparent, rgba(5, 5, 10, 0.88));
+      font-size: 13.5px;
+      color: #e7e9f1;
+      opacity: 0;
+      transform: translateY(8px);
+      transition: opacity 0.35s, transform 0.35s;
+    }
+    .gal-item:hover .gal-cap { opacity: 1; transform: none; }
+    .gal-cap .gal-tag {
+      display: inline-block;
+      font-family: var(--font-mono);
+      font-size: 10.5px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--accent-2);
+      margin-bottom: 4px;
+    }
+    @media (max-width: 860px) { .gallery-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 520px) { .gallery-grid { grid-template-columns: 1fr; } }
+
+    /* ---------- Contact ---------- */
+    .contact-wrap {
+      border-radius: 28px;
+      border: 1px solid var(--card-border);
+      background:
+        radial-gradient(700px circle at 15% 0%, rgba(99, 102, 241, 0.16), transparent 50%),
+        radial-gradient(700px circle at 85% 100%, rgba(168, 85, 247, 0.13), transparent 50%),
+        var(--card);
+      padding: clamp(36px, 6vw, 70px);
+      text-align: center;
+    }
+    .contact-wrap h2 {
+      font-family: var(--font-display);
+      font-size: clamp(30px, 5vw, 52px);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 16px;
+    }
+    .contact-wrap h2 .grad {
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .contact-wrap > p { color: var(--muted); max-width: 500px; margin: 0 auto 34px; }
+    .contact-meta {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px 28px;
+      margin-top: 36px;
+      color: var(--muted);
+      font-size: 14.5px;
+    }
+    .contact-meta span { display: inline-flex; align-items: center; gap: 8px; }
+    .contact-meta a:hover { color: var(--accent-2); }
+    .contact-socials { display: flex; justify-content: center; gap: 10px; margin-top: 30px; }
+
+    /* ---------- Footer ---------- */
+    footer {
+      margin-top: 110px;
+      padding: 34px 0;
+      border-top: 1px solid var(--card-border);
+    }
+    .footer-inner {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+      justify-content: space-between;
+      color: var(--muted);
+      font-size: 14px;
+    }
+    .footer-inner .grad {
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      font-weight: 600;
+    }
+
+    .back-top {
+      position: fixed;
+      right: 22px; bottom: 22px;
+      width: 46px; height: 46px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      background: rgba(12, 12, 22, 0.75);
+      border: 1px solid var(--card-border);
+      backdrop-filter: blur(10px);
+      color: var(--muted);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(10px);
+      transition: opacity 0.3s, transform 0.3s, visibility 0.3s, color 0.3s;
+      z-index: 80;
+    }
+    .back-top.show { opacity: 1; visibility: visible; transform: none; }
+    .back-top:hover { color: var(--text); }
+  </style>
 </head>
 
-<body id="page-top">
-  <!-- ======= Header/ Navbar ======= -->
-  <nav class="navbar navbar-b navbar-trans navbar-expand-md fixed-top" id="mainNav">
-    <div class="container">
-      <a class="navbar-brand js-scroll" href="#page-top">Maswi MR</a>
-      <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarDefault"
-        aria-controls="navbarDefault" aria-expanded="false" aria-label="Toggle navigation">
-        <span></span>
-        <span></span>
-        <span></span>
+<body>
+  <div class="aurora" aria-hidden="true"><span></span><span></span><span></span></div>
+  <div class="grain" aria-hidden="true"></div>
+  <div class="scroll-progress" aria-hidden="true"></div>
+
+  <header>
+    <nav class="nav" aria-label="Main navigation">
+      <a class="nav-logo" href="#home">Maswi<em>MR</em></a>
+      <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#education">Education</a></li>
+        <li><a href="#projects">Apps</a></li>
+        <li><a href="#gallery">Gallery</a></li>
+      </ul>
+      <a class="nav-cta" href="#contact">Get in touch</a>
+      <button class="nav-burger" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
       </button>
-      <div class="navbar-collapse collapse justify-content-end" id="navbarDefault">
-        <ul class="navbar-nav">
-          <li class="nav-item">
-            <a class="nav-link js-scroll active" href="index.html">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link js-scroll" href="#about">About</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link js-scroll" href="#education">Education</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link js-scroll" href="#service">Services</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link js-scroll" href="#work">Experience</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link js-scroll" href="#blog">Photos</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link js-scroll" href="#apps">Apps</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link js-scroll" href="#contact">Contact</a>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
+    </nav>
+  </header>
 
-  <!-- ======= Intro Section ======= -->
-  <div id="home" class="intro route bg-image" style="background-image: url(assets/img/maswi.jpg)">
-    <div class="overlay-itro"></div>
-    <div class="intro-content display-table">
-      <div class="table-cell">
-        <div class="container">
-          <h1 class="intro-title mb-4">Maswi, Mussa Raphael</h1>
-          <p class="intro-subtitle">
-            <span class="text-slider-items">
-              Software Developer, Certified DHIS2 Expert, Geonode Expert, Certified Apprentice Revenue Assurance (CARA) Telecommunications
-            </span>
-            <strong
-              class="text-slider">
-            </strong>
-          </p>
-        </div>
-      </div>
-    </div>
+  <div class="mobile-menu">
+    <a href="#about">About</a>
+    <a href="#experience">Experience</a>
+    <a href="#education">Education</a>
+    <a href="#projects">Apps</a>
+    <a href="#gallery">Gallery</a>
+    <a href="#contact">Contact</a>
   </div>
-  <!-- End Intro Section -->
 
-  <main id="main">
-    <!-- ======= About Section ======= -->
-    <section id="about" class="about-mf sect-pt4 route">
+  <main>
+    <!-- ======= Hero ======= -->
+    <section class="hero" id="home">
       <div class="container">
-        <div class="row">
-          <div class="col-sm-12">
-            <div class="box-shadow-full">
-              <div class="row">
-                <div class="col-md-6">
-                  <div class="row">
-                    <div class="col-sm-6 col-md-5">
-                      <div class="about-img">
-                        <img src="assets/img/maswi.jpg" class="img-fluid rounded b-shadow-a" alt="Maswi" />
-                      </div>
-                    </div>
-                    <div class="col-sm-6 col-md-7">
-                      <div class="about-info">
-                        <p>
-                          <span class="title-s">Name: </span>
-                          <span>Maswi, Mussa Raphael</span>
-                        </p>
-                        <p>
-                          <span class="title-s">Profile: </span>
-                          <span>Full stack developer</span>
-                        </p>
-                        <p>
-                          <span class="title-s">Email: </span>
-                          <span>maswimrtz@gmail.com</span>
-                        </p>
-                        <p>
-                          <span class="title-s">Github: </span>
-                          <span><a href="https://github.com/mrblack360">Maswi, Mussa R</a></span>
-                        </p>
-                        <p>
-                          <span class="title-s">Phone: </span>
-                          <span><a href="tel:+255744033739">+255 744 033 739</a></span>
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="skill-mf">
-                    <p class="title-s">Skills</p>
-                    <span>Mathematical Aptitude</span>
-                    <span class="pull-right">80%</span>
-                    <div class="progress">
-                      <div class="progress-bar" role="progressbar" style="width: 80%" aria-valuenow="80"
-                        aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                    <span>Problem Solving</span>
-                    <span class="pull-right">75%</span>
-                    <div class="progress">
-                      <div class="progress-bar" role="progressbar" style="width: 75%" aria-valuenow="75"
-                        aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                    <span>Programming</span>
-                    <span class="pull-right">70%</span>
-                    <div class="progress">
-                      <div class="progress-bar" role="progressbar" style="width: 70%" aria-valuenow="70"
-                        aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                    <span>Organizational Management</span>
-                    <span class="pull-right">85%</span>
-                    <div class="progress">
-                      <div class="progress-bar" role="progressbar" style="width: 85%" aria-valuenow="85"
-                        aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                    <span>Time Management</span>
-                    <span class="pull-right">80%</span>
-                    <div class="progress">
-                      <div class="progress-bar" role="progressbar" style="width: 80%" aria-valuenow="80"
-                        aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                    <span>Accuracy & Attention to details</span>
-                    <span class="pull-right">60%</span>
-                    <div class="progress">
-                      <div class="progress-bar" role="progressbar" style="width: 60%" aria-valuenow="60"
-                        aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="about-me pt-4 pt-md-0">
-                    <div class="title-box-2">
-                      <h5 class="title-left">About me</h5>
-                    </div>
-                    <p class="lead">
-                      Software development aficionado working in the computer
-                      software industry. Skilled in Programming, Mathematical
-                      Amplitude, Problem Solving, Organization Management, and
-                      Time Management.
-                    </p>
-                    <p class="lead">
-                      Self-disciplined and powerful business development 
-                      professional with a Bachelor of Science in Computer 
-                      Science from the University of Dar es Salaam (UDSM).
-                    </p>
-                  </div>
-                </div>
-              </div>
+        <div class="hero-grid">
+          <div>
+            <div class="hero-badge reveal"><span class="dot"></span> Available for projects &amp; consultation</div>
+            <h1 class="reveal" data-delay="1">Hi, I'm <span class="grad">Maswi</span>.<br />I build software that works.</h1>
+            <p class="hero-role reveal" data-delay="2">&gt; <span class="typed"></span><span class="caret">&nbsp;</span></p>
+            <p class="hero-desc reveal" data-delay="2">
+              Full-stack developer based in Dar es Salaam, Tanzania — currently an IT Executive
+              Engineer at Airtel Tanzania. I turn complex problems into clean, reliable systems,
+              from health information platforms to revenue assurance.
+            </p>
+            <div class="hero-actions reveal" data-delay="3">
+              <a class="btn btn-primary" href="#projects">View my work</a>
+              <a class="btn btn-ghost" href="#contact">Contact me</a>
             </div>
+            <div class="hero-socials reveal" data-delay="3">
+              <a class="icon-link" href="https://github.com/mrblack360" target="_blank" rel="noopener" aria-label="GitHub">
+                <svg viewBox="0 0 24 24"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.1.79-.25.79-.55v-2.1c-3.2.7-3.87-1.36-3.87-1.36-.52-1.33-1.28-1.69-1.28-1.69-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.19 1.76 1.19 1.03 1.76 2.7 1.25 3.35.96.1-.75.4-1.25.72-1.54-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.78 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.8 1.19 1.83 1.19 3.09 0 4.42-2.7 5.39-5.27 5.67.41.36.78 1.06.78 2.14v3.17c0 .31.21.66.8.55A11.52 11.52 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"/></svg>
+              </a>
+              <a class="icon-link" href="https://www.linkedin.com/in/maswi-mussa-raphael-047a26b4/" target="_blank" rel="noopener" aria-label="LinkedIn">
+                <svg viewBox="0 0 24 24"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28ZM5.34 7.43a2.07 2.07 0 1 1 0-4.13 2.07 2.07 0 0 1 0 4.13ZM7.12 20.45H3.55V9h3.57v11.45Z"/></svg>
+              </a>
+              <a class="icon-link" href="https://twitter.com/maswimrt" target="_blank" rel="noopener" aria-label="X (Twitter)">
+                <svg viewBox="0 0 24 24"><path d="M18.24 2.25h3.31l-7.23 8.26 8.5 11.24h-6.66l-5.21-6.82-5.97 6.82H1.67l7.73-8.84L1.25 2.25h6.83l4.71 6.23 5.45-6.23Zm-1.16 17.52h1.83L7.08 4.13H5.12l11.96 15.64Z"/></svg>
+              </a>
+              <a class="icon-link" href="https://www.instagram.com/maswimr/" target="_blank" rel="noopener" aria-label="Instagram">
+                <svg viewBox="0 0 24 24"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.41a3.72 3.72 0 0 1-1.38-.9 3.72 3.72 0 0 1-.9-1.38c-.16-.42-.36-1.06-.41-2.23-.06-1.27-.07-1.65-.07-4.85s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41 1.27-.06 1.65-.07 4.85-.07ZM12 0C8.74 0 8.33.01 7.05.07 5.78.13 4.9.33 4.14.63a5.88 5.88 0 0 0-2.13 1.38A5.88 5.88 0 0 0 .63 4.14C.33 4.9.13 5.78.07 7.05.01 8.33 0 8.74 0 12s.01 3.67.07 4.95c.06 1.27.26 2.15.56 2.91.31.8.72 1.47 1.38 2.13a5.88 5.88 0 0 0 2.13 1.38c.76.3 1.64.5 2.91.56C8.33 23.99 8.74 24 12 24s3.67-.01 4.95-.07c1.27-.06 2.15-.26 2.91-.56a5.88 5.88 0 0 0 2.13-1.38 5.88 5.88 0 0 0 1.38-2.13c.3-.76.5-1.64.56-2.91.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95c-.06-1.27-.26-2.15-.56-2.91a5.88 5.88 0 0 0-1.38-2.13A5.88 5.88 0 0 0 19.86.63c-.76-.3-1.64-.5-2.91-.56C15.67.01 15.26 0 12 0Zm0 5.84a6.16 6.16 0 1 0 0 12.32 6.16 6.16 0 0 0 0-12.32ZM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8Zm7.85-10.4a1.44 1.44 0 1 1-2.88 0 1.44 1.44 0 0 1 2.88 0Z"/></svg>
+              </a>
+            </div>
+          </div>
+          <div class="hero-portrait reveal" data-delay="2">
+            <div class="portrait-ring">
+              <img src="assets/img/maswi.jpg" alt="Portrait of Maswi, Mussa Raphael" />
+            </div>
+            <div class="float-chip c1">&lt;fullstack /&gt;</div>
+            <div class="float-chip c2">DHIS2 · GeoNode</div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Education Section -->
-    <section id="education" class="portfolio-mf sect-pt4 route">
-      <div class="container">
-        <div class="row">
-          <div class="col-sm-12">
-            <div class="title-box text-center">
-              <h3 class="title-a">Education</h3>
-              <p class="subtitle-a">Academic background</p>
-              <div class="line-mf"></div>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-4">
-            <div class="work-box">
-              <a href="assets/img/udsm.png" data-gall="portfolioGallery" class="venobox">
-                <div class="work-img">
-                  <img src="assets/img/udsm.png" alt="Maswi, UDSM" loading="lazy" class="img-fluid d-block mx-auto" />
-                </div>
-              </a>
-              <div class="work-content">
-                <div class="row">
-                  <div class="col-sm-10">
-                    <h2 class="w-title">University of Dar es Salaam</h2>
-                    <div class="w-more">
-                      <span class="w-ctegory">BSc In Computer Science</span> /
-                      <span class="w-date">Nov 2018 - Nov 2021</span>
-                    </div>
-                  </div>
-                  <div class="col-sm-2">
-                    <div class="w-like">
-                      <a href="https://www.udsm.ac.tz" target="_blank">
-                        <span class="ion-ios-arrow-right"></span></a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="work-box">
-              <div class="work-img">
-                <img src="assets/img/Tabora.jpg" alt="Maswi, Tabora School" loading="lazy" class="img-fluid d-block mx-auto" />
-              </div>
-              </a>
-              <div class="work-content">
-                <div class="row">
-                  <div class="col-sm-10">
-                    <h2 class="w-title">Tabora Boys' Secondary School</h2>
-                    <div class="w-more">
-                      <span class="w-ctegory">Science</span> /
-                      <span class="w-date">July 2016 - May 2018</span>
-                    </div>
-                  </div>
-                  <div class="col-sm-2">
-                    <div class="w-like">
-                      <a target="_blank"
-                        href="https://www.google.com/search?q=tabora+boys%27+sec+school&oq=tabora+boys&aqs=chrome.0.0i512j69i57j0i512l3.9273j0j7&sourceid=chrome&ie=UTF-8">
-                        <span class="ion-ios-arrow-right"></span></a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="work-box">
-              <a href="assets/img/udsm.png" data-gall="portfolioGallery" class="venobox">
-                <div class="work-img">
-                  <img src="assets/img/thaqaafa.png" loading="lazy" alt="Maswi, Thaqaafa" class="img-fluid d-block mx-auto img-responsive"
-                    height="200px" />
-                </div>
-              </a>
-              <div class="work-content">
-                <div class="row">
-                  <div class="col-sm-10">
-                    <h2 class="w-title">Thaqaafa Secondary School</h2>
-                    <div class="w-more">
-                      <span class="w-ctegory">Science</span> /
-                      <span class="w-date">January 2012 - Nov 2015</span>
-                    </div>
-                  </div>
-                  <div class="col-sm-2">
-                    <div class="w-like">
-                      <a href="http://thaqaafa.com/" target="_blank">
-                        <span class="ion-ios-arrow-right"></span></a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <!-- End Portfolio Section -->
-
-    <!-- ======= Services Section ======= -->
-    <section id="service" class="services-mf pt-5 route">
-      <div class="container">
-        <div class="row">
-          <div class="col-sm-12">
-            <div class="title-box text-center">
-              <h3 class="title-a">Services</h3>
-              <p class="subtitle-a">
-                Bringing to the customer the required services.
-              </p>
-              <div class="line-mf"></div>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-4">
-            <div class="service-box">
-              <div class="service-ico">
-                <span class="ico-circle"><i class="ion-monitor"></i></span>
-              </div>
-              <div class="service-content">
-                <h2 class="s-title">Software Development</h2>
-                <p class="s-description text-center">
-                  Directing and participating in programming activities, 
-                  monitoring, and evaluating system performance, and designing 
-                  and implementing new programs and features.
-                </p>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="service-box">
-              <div class="service-ico">
-                <span class="ico-circle"><i class="ion-code-working"></i></span>
-              </div>
-              <div class="service-content">
-                <h2 class="s-title">IT Consultation</h2>
-                <p class="s-description text-center">
-                  Consulting staff, analyzing data, determining requirements 
-                  and defining objectives, making recommendations about hardware, software and systems.
-                </p>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="service-box">
-              <div class="service-ico">
-                <span class="ico-circle"><i class="ion-stats-bars"></i></span>
-              </div>
-              <div class="service-content">
-                <h2 class="s-title">Data Collection & Analysis</h2>
-                <p class="s-description text-center">
-                  Collecting, measuring and analyzing accurate insights for
-                  research using standard validated techniques.
-                </p>
-              </div>
-            </div>
-          </div>
-          <!-- <div class="col-md-4">
-              <div class="service-box">
-                <div class="service-ico">
-                  <span class="ico-circle"
-                    ><i class="ion-android-phone-portrait"></i
-                  ></span>
-                </div>
-                <div class="service-content">
-                  <h2 class="s-title">Responsive Design</h2>
-                  <p class="s-description text-center">
-                    Tehs
-                  </p>
-                </div>
-              </div>
-            </div> -->
-        </div>
-      </div>
-    </section>
-    <!-- End Services Section -->
-
-    <!-- ======= Counter Section ======= -->
-    <div class="section-counter paralax-mf bg-image" style="background-image: url(assets/img/counters-bg.jpg)">
-      <div class="overlay-mf"></div>
-      <div class="container">
-        <div class="row">
-          <div class="col-sm-3 col-lg-3">
-            <div class="counter-box counter-box pt-4 pt-md-0">
-              <div class="counter-ico">
-                <span class="ico-circle"><i class="ion-checkmark-round"></i></span>
-              </div>
-              <div class="counter-num">
-                <p class="counter">15</p>
-                <span class="counter-text">WORKS COMPLETED</span>
-              </div>
-            </div>
-          </div>
-          <div class="col-sm-3 col-lg-3">
-            <div class="counter-box pt-4 pt-md-0">
-              <div class="counter-ico">
-                <span class="ico-circle"><i class="ion-ios-calendar-outline"></i></span>
-              </div>
-              <div class="counter-num">
-                <p class="counter">5</p>
-                <span class="counter-text">YEARS OF EXPERIENCE</span>
-              </div>
-            </div>
-          </div>
-          <div class="col-sm-3 col-lg-3">
-            <div class="counter-box pt-4 pt-md-0">
-              <div class="counter-ico">
-                <span class="ico-circle"><i class="ion-ios-people"></i></span>
-              </div>
-              <div class="counter-num">
-                <p class="counter">5</p>
-                <span class="counter-text">TOTAL CLIENTS</span>
-              </div>
-            </div>
-          </div>
-          <div class="col-sm-3 col-lg-3">
-            <div class="counter-box pt-4 pt-md-0">
-              <div class="counter-ico">
-                <span class="ico-circle"><i class="ion-ribbon-a"></i></span>
-              </div>
-              <div class="counter-num">
-                <p class="counter">5</p>
-                <span class="counter-text">AWARD WON</span>
-              </div>
-            </div>
-          </div>
-        </div>
+    <!-- ======= Marquee ======= -->
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee-track">
+        <span>Python</span><span>TypeScript</span><span>JavaScript</span><span>Dart</span><span>Java</span><span>Shell</span><span>DHIS2</span><span>GeoNode</span><span>Revenue Assurance</span><span>Data Analysis</span>
+        <span>Python</span><span>TypeScript</span><span>JavaScript</span><span>Dart</span><span>Java</span><span>Shell</span><span>DHIS2</span><span>GeoNode</span><span>Revenue Assurance</span><span>Data Analysis</span>
       </div>
     </div>
-    <!-- End Counter Section -->
 
-    <!-- Work Section -->
-    <section id="work" class="portfolio-mf sect-pt4 route">
+    <!-- ======= Stats ======= -->
+    <section id="stats">
       <div class="container">
-        <div class="row">
-          <div class="col-sm-12">
-            <div class="title-box text-center">
-              <h3 class="title-a">Work Experience</h3>
-              <p class="subtitle-a">Working experience</p>
-              <div class="line-mf"></div>
-            </div>
-          </div>
+        <div class="stats-grid">
+          <div class="stat-card reveal"><div class="stat-num" data-count="15" data-suffix="+">0</div><div class="stat-label">Projects completed</div></div>
+          <div class="stat-card reveal" data-delay="1"><div class="stat-num" data-count="8" data-suffix="+">0</div><div class="stat-label">Years of experience</div></div>
+          <div class="stat-card reveal" data-delay="2"><div class="stat-num" data-count="5" data-suffix="+">0</div><div class="stat-label">Happy clients</div></div>
+          <div class="stat-card reveal" data-delay="3"><div class="stat-num" data-count="5" data-suffix="">0</div><div class="stat-label">Awards won</div></div>
         </div>
-        <div class="row">
-          <div class="col-md-4">
-            <div class="work-box">
-              <a href="assets/img/airtel.png" data-gall="portfolioGallery" class="venobox">
-                <div class="work-img">
-                  <img src="assets/img/airtel.png" alt="Maswi, Airtel" loading="lazy" class="img-fluid d-block mx-auto" />
-                </div>
-              </a>
-              <div class="work-content">
-                <div class="row">
-                  <div class="col-sm-10">
-                    <h2 class="w-title">Airtel Tanzania</h2>
-                    <div class="w-more">
-                      <span class="w-ctegory">IT - Executive Engineer</span> /
-                      <span class="w-date">September 2021 to date</span>
-                    </div>
-                  </div>
-                  <div class="col-sm-2">
-                    <div class="w-like">
-                      <a href="https://airtel.co.tz/" target="_blank">
-                        <span class="ion-ios-arrow-right"></span></a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+      </div>
+    </section>
+
+    <!-- ======= About ======= -->
+    <section id="about">
+      <div class="container">
+        <div class="section-tag reveal">01 — about</div>
+        <h2 class="section-title reveal">A developer who ships, <br />end to end.</h2>
+        <p class="section-sub reveal">From health information systems used across Tanzania to telecom revenue assurance at scale.</p>
+
+        <div class="bento">
+          <div class="bento-card wide reveal">
+            <div class="bento-icon">🧑‍💻</div>
+            <h3>Who I am</h3>
+            <p>
+              I'm Maswi, Mussa Raphael — a software development aficionado with a BSc in Computer
+              Science from the University of Dar es Salaam (UDSM). I'm self-disciplined, detail-driven
+              and comfortable owning a product from idea to production: designing, building, monitoring
+              and evaluating systems that people depend on every day.
+            </p>
           </div>
-          <div class="col-md-4">
-            <div class="work-box">
-              <a href="assets/img/singo.png" data-gall="portfolioGallery" class="venobox">
-                <div class="work-img">
-                  <img src="assets/img/singo.png" alt="Maswi, Singo" loading="lazy" class="img-fluid d-block mx-auto" />
-                </div>
-              </a>
-              <div class="work-content">
-                <div class="row">
-                  <div class="col-sm-10">
-                    <h2 class="w-title">Singo Africa Limited</h2>
-                    <div class="w-more">
-                      <span class="w-ctegory">Software Developer</span> /
-                      <span class="w-date">March 2020 to September 2021</span>
-                    </div>
-                  </div>
-                  <div class="col-sm-2">
-                    <div class="w-like">
-                      <a href="https://www.singo.africa/" target="_blank">
-                        <span class="ion-ios-arrow-right"></span></a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+          <div class="bento-card reveal" data-delay="1">
+            <div class="bento-icon">📍</div>
+            <h3>Based in</h3>
+            <p>Kinondoni, Dar es Salaam, Tanzania — working with teams locally and remotely.</p>
           </div>
-          <div class="col-md-4">
-            <div class="work-box">
-              <div class="work-img">
-                <img src="assets/img/dhis.jpeg" alt="Maswi, DHIS2" loading="lazy" class="img-fluid d-block mx-auto" />
-              </div>
-              </a>
-              <div class="work-content">
-                <div class="row">
-                  <div class="col-sm-10">
-                    <h2 class="w-title">UDSM DHIS2 Project</h2>
-                    <div class="w-more">
-                      <span class="w-ctegory">Software Developer</span> /
-                      <span class="w-date">July 2018 - September 2020</span>
-                    </div>
-                  </div>
-                  <div class="col-sm-2">
-                    <div class="w-like">
-                      <a target="_blank" href="https://dhis2.org/">
-                        <span class="ion-ios-arrow-right"></span></a>
-                    </div>
-                  </div>
-                </div>
-              </div>
+          <div class="bento-card reveal" data-delay="1">
+            <div class="bento-icon">🛠️</div>
+            <h3>What I do</h3>
+            <p>Software development, IT consultation, and data collection &amp; analysis — recommending the right hardware, software and systems for the job.</p>
+          </div>
+          <div class="bento-card wide reveal" data-delay="2">
+            <div class="bento-icon">⚡</div>
+            <h3>Certifications &amp; expertise</h3>
+            <p>Certified DHIS2 Expert · GeoNode Expert · Certified Apprentice Revenue Assurance (CARA) — Telecommunications.</p>
+            <div class="chip-row">
+              <span class="chip">Python</span>
+              <span class="chip">TypeScript</span>
+              <span class="chip">JavaScript</span>
+              <span class="chip">Dart</span>
+              <span class="chip">Java</span>
+              <span class="chip">Shell</span>
+              <span class="chip">DHIS2</span>
+              <span class="chip">GeoNode</span>
             </div>
           </div>
         </div>
       </div>
     </section>
-    <!-- End Portfolio Section -->
 
-    <!-- ======= Blog Section ======= -->
-    <section id="blog" class="blog-mf sect-pt4 route">
+    <!-- ======= Experience ======= -->
+    <section id="experience">
       <div class="container">
-        <div class="row">
-          <div class="col-sm-12">
-            <div class="title-box text-center">
-              <h3 class="title-a">
-                Photo Gallery
-              </h3>
-              <p class="subtitle-a">
-                Snapshots of events I have participated.
+        <div class="section-tag reveal">02 — experience</div>
+        <h2 class="section-title reveal">Where I've worked</h2>
+        <p class="section-sub reveal">A path through telecom, startups and public health tech.</p>
+
+        <div class="timeline">
+          <div class="tl-item reveal">
+            <div class="tl-card">
+              <div class="tl-head">
+                <h3>Airtel Tanzania</h3>
+                <span class="tl-date">Sep 2021 — Present</span>
+              </div>
+              <div class="tl-role">IT — Executive Engineer</div>
+              <p>
+                Engineering and assuring IT systems for one of Tanzania's largest telecom operators,
+                with a focus on revenue assurance and reliable operations at national scale.
               </p>
-              <div class="line-mf"></div>
+              <a class="tl-link" href="https://airtel.co.tz/" target="_blank" rel="noopener">airtel.co.tz ↗</a>
             </div>
           </div>
-        </div>
-        <div class="row">
-          <div class="col-md-4">
-            <div class="card card-blog">
-              <div class="card-img">
-                <a href="assets/img/class-photo.jpg"><img src="assets/img/class-photo.jpg" alt="Maswi, CoICT" loading="lazy"
-                    class="img-fluid d-block mx-auto img-responsive"></a>
+          <div class="tl-item reveal" data-delay="1">
+            <div class="tl-card">
+              <div class="tl-head">
+                <h3>Singo Africa Limited</h3>
+                <span class="tl-date">Mar 2020 — Sep 2021</span>
               </div>
-              <div class="card-body">
-                <div class="card-category-box">
-                  <div class="card-category">
-                    <h6 class="category">Education</h6>
-                  </div>
-                </div>
-                <p class="card-description">
-                  Class photo of the BSc In Computer Science Programme 2018-21 
-                </p>
-                <h4 class="card-title"><a href="assets/img/class-photo.jpg">See more ideas about Education at University
-                    of Dar es Salaam...</a></h4>
-              </div>
-              <div class="card-footer">
-                <div class="post-author">
-                </div>
-                <div class="post-date">
-                  <span class="ion-ios-clock-outline"></span> June 8 2021
-                </div>
-              </div>
+              <div class="tl-role">Software Developer</div>
+              <p>
+                Built and shipped products at a fast-moving Tanzanian tech company, working across
+                the stack to deliver software for local businesses.
+              </p>
+              <a class="tl-link" href="https://www.singo.africa/" target="_blank" rel="noopener">singo.africa ↗</a>
             </div>
           </div>
-          <div class="col-md-4">
-            <div class="card card-blog">
-              <div class="card-img">
-                <a href="assets/img/singo-photo.jpg"><img src="assets/img/singo-photo.jpg" alt="Maswi, Singo Africa Photo" loading="lazy"
-                    class="img-fluid d-block mx-auto img-responsive"></a>
+          <div class="tl-item reveal" data-delay="2">
+            <div class="tl-card">
+              <div class="tl-head">
+                <h3>UDSM DHIS2 Project</h3>
+                <span class="tl-date">Jul 2018 — Sep 2020</span>
               </div>
-              <div class="card-body">
-                <div class="card-category-box">
-                  <div class="card-category">
-                    <h6 class="category">Get Together</h6>
-                  </div>
-                </div>
-                <p class="card-description">
-                  Singo Africa employees social get together at Water World Dar es Salaam
-                </p>
-                <h4 class="card-title"><a href="assets/img/singo-photo.jpg">See more ideas about employees get
-                    together</a></h4>
-              </div>
-              <div class="card-footer">
-                <div class="post-author">
-                </div>
-                <div class="post-date">
-                  <span class="ion-ios-clock-outline"></span> February 2021
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="card card-blog">
-              <div class="card-img">
-                <a href="assets/img/crs-photo.jpg"><img src="assets/img/crs-photo.jpg" alt="Maswi, CoICT CRs meeting" loading="lazy"
-                    class="img-fluid d-block mx-auto img-responsive"></a>
-              </div>
-              <div class="card-body">
-                <div class="card-category-box">
-                  <div class="card-category">
-                    <h6 class="category">Leadership</h6>
-                  </div>
-                </div>
-                <p class="card-description">
-                  Group photo of CoICT students' leaders 2020/2021 after Executive Meeting
-                </p>
-                <h4 class="card-title"><a href="assets/img/crs-photo.jpg">See more ideas about students' leaders</a>
-                </h4>
-              </div>
-              <div class="card-footer">
-                <div class="post-author">
-                </div>
-                <div class="post-date">
-                  <span class="ion-ios-clock-outline"></span> February 2021
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="card card-blog">
-              <div class="card-img">
-                <a href="assets/img/speech.jpg"><img src="assets/img/speech.jpg" alt="Maswi speech" loading="lazy"
-                    class="img-fluid d-block mx-auto img-responsive"></a>
-              </div>
-              <div class="card-body">
-                <div class="card-category-box">
-                  <div class="card-category">
-                    <h6 class="category">Speech</h6>
-                  </div>
-                </div>
-                <p class="card-description">
-                  Maswi speaking during the seminar on UDSM guidance and counselling unit.
-                </p>
-                <h4 class="card-title"><a href="assets/img/speech.jpg">See more ideas about Guidance and counselling</a>
-                </h4>
-              </div>
-              <div class="card-footer">
-                <div class="post-author">
-                </div>
-                <div class="post-date">
-                  <span class="ion-ios-clock-outline"></span> January 2021
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="card card-blog">
-              <div class="card-img">
-                <a href="assets/img/tss.jpg"><img src="assets/img/tss.jpg" alt="Maswi TSS Alumni meeting" loading="lazy"
-                    class="img-fluid d-block mx-auto img-responsive"></a>
-              </div>
-              <div class="card-body">
-                <div class="card-category-box">
-                  <div class="card-category">
-                    <h6 class="category">Get Together</h6>
-                  </div>
-                </div>
-                <p class="card-description">
-                  Maswi with former classmates at Kigamboni Dar es Salaam.
-                </p>
-                <h4 class="card-title"><a href="assets/img/tss.jpg">See more ideas about getting together</a>
-                </h4>
-              </div>
-              <div class="card-footer">
-                <div class="post-author">
-                </div>
-                <div class="post-date">
-                  <span class="ion-ios-clock-outline"></span> July 2021
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="card card-blog">
-              <div class="card-img">
-                <a href="assets/img/charity.jpg"><img src="assets/img/charity.jpg" alt="Maswi at Mbweni Charity" loading="lazy"
-                    class="img-fluid d-block mx-auto img-responsive"></a>
-              </div>
-              <div class="card-body">
-                <div class="card-category-box">
-                  <div class="card-category">
-                    <h6 class="category">Charity</h6>
-                  </div>
-                </div>
-                <p class="card-description">
-                  Maswi with orphans when he visited orphanage at Mbweni, Dar es Salaam.
-                </p>
-                <h4 class="card-title"><a href="assets/img/charity.jpg">See more ideas about charity events...</a>
-                </h4>
-              </div>
-              <div class="card-footer">
-                <div class="post-author">
-                </div>
-                <div class="post-date">
-                  <span class="ion-ios-clock-outline"></span> May 2021
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section><!-- End Blog Section -->
-
-    <!-- Apps Gallery -->
-    <section id="apps" class="portfolio-mf sect-pt4 route">
-      <div class="container">
-        <div class="row">
-          <div class="col-sm-12">
-            <div class="title-box text-center">
-              <h3 class="title-a">App Gallery</h3>
-              <p class="subtitle-a">Explore apps that increase productivity and save time for you and your business.</p>
-              <div class="line-mf"></div>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-4">
-            <div class="work-box">
-              <div class="work-img">
-                <img src="assets/img/kandanda.webp" alt="Kandanda" loading="lazy" class="img-fluid d-block mx-auto" />
-              </div>
-              </a>
-              <div class="work-content">
-                <div class="row">
-                  <div class="col-sm-10">
-                    <h2 class="w-title">Kandanda</h2>
-                    <div class="w-more">
-                      
-                    </div>
-                  </div>
-                  <div class="col-sm-2">
-                    <div class="w-like">
-                      <a target="_blank" href="https://kandanda.maswimr.website/">
-                        <span class="ion-ios-arrow-right"></span></a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="work-box">
-              <a href="assets/img/favicon.ico" data-gall="portfolioGallery" class="venobox">
-                <div class="work-img">
-                  <img src="assets/img/favicon.ico" alt="Dashboard" loading="lazy" class="img-fluid d-block mx-auto" />
-                </div>
-              </a>
-              <div class="work-content">
-                <div class="row">
-                  <div class="col-sm-10">
-                    <h2 class="w-title">Dashboard</h2>
-                    <div class="w-more">
-                      
-                    </div>
-                  </div>
-                  <div class="col-sm-2">
-                    <div class="w-like">
-                      <a href="https://dashboard.maswimr.website/" target="_blank">
-                        <span class="ion-ios-arrow-right"></span></a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="work-box">
-              <a href="assets/img/start.webp" data-gall="portfolioGallery" class="venobox">
-                <div class="work-img">
-                  <img src="assets/img/start.webp" alt="Start" loading="lazy" class="img-fluid d-block mx-auto" />
-                </div>
-              </a>
-              <div class="work-content">
-                <div class="row">
-                  <div class="col-sm-10">
-                    <h2 class="w-title">Start</h2>
-                    <div class="w-more">
-                     
-                    </div>
-                  </div>
-                  <div class="col-sm-2">
-                    <div class="w-like">
-                      <a href="https://start.maswimr.website/" target="_blank">
-                        <span class="ion-ios-arrow-right"></span></a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="work-box">
-              <a href="assets/img/psaims.jpg" data-gall="portfolioGallery" class="venobox">
-                <div class="work-img">
-                  <img src="assets/img/psaims.jpg" alt="Start" loading="lazy" class="img-fluid d-block mx-auto" />
-                </div>
-              </a>
-              <div class="work-content">
-                <div class="row">
-                  <div class="col-sm-10">
-                    <h2 class="w-title">PSAIMS</h2>
-                    <div class="w-more">
-                      Primary School Academic Information Management System, PSAIMS makes it easy to collect, process, analyse and disseminate Tanzanian based primary school academic information.
-                    </div>
-                  </div>
-                  <div class="col-sm-2">
-                    <div class="w-like">
-                      <a href="https://psaims.maswimr.website/" target="_blank">
-                        <span class="ion-ios-arrow-right"></span></a>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              <div class="tl-role">Software Developer</div>
+              <p>
+                Developed on DHIS2 — the world's largest health information management platform —
+                supporting data-driven public health in Tanzania.
+              </p>
+              <a class="tl-link" href="https://dhis2.org/" target="_blank" rel="noopener">dhis2.org ↗</a>
             </div>
           </div>
         </div>
       </div>
     </section>
-    <!-- End of Apps Section -->
 
-    <!-- ======= Contact Section ======= -->
-    <section class="paralax-mf footer-paralax bg-image sect-mt4 route"
-      style="background-image: url(assets/img/maswi.jpg)">
-      <div class="overlay-mf"></div>
+    <!-- ======= Education ======= -->
+    <section id="education">
       <div class="container">
-        <div class="row">
-          <div class="col-sm-12">
-            <div class="contact-mf">
-              <div id="contact" class="box-shadow-full">
-                <div class="row">
-                  <div class="col-md-6">
-                    <div class="title-box-2 pt-4 pt-md-0">
-                      <h5 class="title-left">Get in Touch</h5>
-                    </div>
-                    <div class="more-info">
-                      <p class="lead">
-                        Incase of any enquiry, don't hesitate to let me know:
-                      </p>
-                      <ul class="list-ico">
-                        <li>
-                          <span class="ion-ios-location"></span>Kinondoni, Dar es Salaam
-                        </li>
-                        <li>
-                          <span class="ion-ios-telephone"></span> <a href="tel:255744033739">+255 7440 33
-                          739</a>/<a href="tel:255786670024">+255 786 6700 24</a>
-                        </li>
-                        <li>
-                          <span class="ion-email"></span> maswimrtz@gmail.com
-                        </li>
-                      </ul>
-                    </div>
-                    <div class="socials">
-                      <ul>
-                        <li>
-                          <a href="https://www.facebook.com/raphael.raphael.165"><span class="ico-circle"><i
-                                class="ion-social-facebook"></i></span></a>
-                        </li>
-                        <li>
-                          <a href="https://www.instagram.com/maswimr/"><span class="ico-circle"><i
-                                class="ion-social-instagram"></i></span></a>
-                        </li>
-                        <li>
-                          <a href="https://twitter.com/maswimrt"><span class="ico-circle"><i
-                                class="ion-social-twitter"></i></span></a>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                  <div col-md-6>
-                    <div class="badge-base LI-profile-badge" data-locale="en_US" data-size="large" data-theme="light" data-type="HORIZONTAL" data-vanity="maswi-mussa-raphael-047a26b4" data-version="v1"></div>
-                  </div>
-                </div>
-              </div>
-            </div>
+        <div class="section-tag reveal">03 — education</div>
+        <h2 class="section-title reveal">Academic background</h2>
+        <p class="section-sub reveal">The foundations behind the work.</p>
+
+        <div class="edu-grid">
+          <div class="edu-card reveal">
+            <div class="edu-logo"><img src="assets/img/udsm.png" alt="University of Dar es Salaam logo" loading="lazy" /></div>
+            <h3>University of Dar es Salaam</h3>
+            <div class="edu-course">BSc in Computer Science</div>
+            <div class="edu-date">Nov 2018 — Nov 2021</div>
+          </div>
+          <div class="edu-card reveal" data-delay="1">
+            <div class="edu-logo"><img src="assets/img/Tabora.jpg" alt="Tabora Boys' Secondary School" loading="lazy" /></div>
+            <h3>Tabora Boys' Secondary School</h3>
+            <div class="edu-course">Advanced Level — Science</div>
+            <div class="edu-date">Jul 2016 — May 2018</div>
+          </div>
+          <div class="edu-card reveal" data-delay="2">
+            <div class="edu-logo"><img src="assets/img/thaqaafa.png" alt="Thaqaafa Secondary School logo" loading="lazy" /></div>
+            <h3>Thaqaafa Secondary School</h3>
+            <div class="edu-course">Ordinary Level — Science</div>
+            <div class="edu-date">Jan 2012 — Nov 2015</div>
           </div>
         </div>
       </div>
     </section>
-    <!-- End Contact Section -->
+
+    <!-- ======= Projects / Apps ======= -->
+    <section id="projects">
+      <div class="container">
+        <div class="section-tag reveal">04 — apps</div>
+        <h2 class="section-title reveal">Things I've built</h2>
+        <p class="section-sub reveal">Apps that increase productivity and save time for you and your business.</p>
+
+        <div class="proj-grid">
+          <a class="proj-card reveal" href="https://kandanda.maswimr.website/" target="_blank" rel="noopener">
+            <div class="proj-top">
+              <div class="proj-logo"><img src="assets/img/kandanda.webp" alt="Kandanda" loading="lazy" /></div>
+              <div class="proj-arrow">→</div>
+            </div>
+            <h3>Kandanda</h3>
+            <p>Football, the Tanzanian way — live scores and football insights built for local fans.</p>
+            <span class="proj-url">kandanda.maswimr.website</span>
+          </a>
+          <a class="proj-card reveal" data-delay="1" href="https://psaims.maswimr.website/" target="_blank" rel="noopener">
+            <div class="proj-top">
+              <div class="proj-logo"><img src="assets/img/psaims.jpg" alt="PSAIMS" loading="lazy" /></div>
+              <div class="proj-arrow">→</div>
+            </div>
+            <h3>PSAIMS</h3>
+            <p>Primary School Academic Information Management System — collect, process, analyse and disseminate Tanzanian primary school academic data with ease.</p>
+            <span class="proj-url">psaims.maswimr.website</span>
+          </a>
+          <a class="proj-card reveal" data-delay="1" href="https://dashboard.maswimr.website/" target="_blank" rel="noopener">
+            <div class="proj-top">
+              <div class="proj-logo proj-logo-tile">📊</div>
+              <div class="proj-arrow">→</div>
+            </div>
+            <h3>Dashboard</h3>
+            <p>A personal analytics dashboard — key numbers and insights in one clean view.</p>
+            <span class="proj-url">dashboard.maswimr.website</span>
+          </a>
+          <a class="proj-card reveal" data-delay="2" href="https://start.maswimr.website/" target="_blank" rel="noopener">
+            <div class="proj-top">
+              <div class="proj-logo"><img src="assets/img/start.webp" alt="Start" loading="lazy" /></div>
+              <div class="proj-arrow">→</div>
+            </div>
+            <h3>Start</h3>
+            <p>A fast, minimal start page to launch your day — everything you need, one tab away.</p>
+            <span class="proj-url">start.maswimr.website</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======= Gallery ======= -->
+    <section id="gallery">
+      <div class="container">
+        <div class="section-tag reveal">05 — gallery</div>
+        <h2 class="section-title reveal">Moments along the way</h2>
+        <p class="section-sub reveal">Snapshots of events I have participated in.</p>
+
+        <div class="gallery-grid">
+          <figure class="gal-item reveal">
+            <img src="assets/img/class-photo.jpg" alt="Class photo of BSc Computer Science 2018-21 at UDSM" loading="lazy" />
+            <figcaption class="gal-cap"><span class="gal-tag">Education</span><br />BSc in Computer Science class of 2018–21, UDSM</figcaption>
+          </figure>
+          <figure class="gal-item reveal" data-delay="1">
+            <img src="assets/img/crs-photo.jpg" alt="CoICT students' leaders after executive meeting" loading="lazy" />
+            <figcaption class="gal-cap"><span class="gal-tag">Leadership</span><br />CoICT students' leaders 2020/21 after an executive meeting</figcaption>
+          </figure>
+          <figure class="gal-item reveal" data-delay="2">
+            <img src="assets/img/speech.jpg" alt="Maswi speaking at a UDSM guidance and counselling seminar" loading="lazy" />
+            <figcaption class="gal-cap"><span class="gal-tag">Speaking</span><br />Seminar on the UDSM guidance and counselling unit</figcaption>
+          </figure>
+          <figure class="gal-item reveal">
+            <img src="assets/img/singo-photo.jpg" alt="Singo Africa team get-together" loading="lazy" />
+            <figcaption class="gal-cap"><span class="gal-tag">Team</span><br />Singo Africa get-together at Water World, Dar es Salaam</figcaption>
+          </figure>
+          <figure class="gal-item reveal" data-delay="1">
+            <img src="assets/img/charity.jpg" alt="Maswi visiting an orphanage at Mbweni" loading="lazy" />
+            <figcaption class="gal-cap"><span class="gal-tag">Charity</span><br />Visiting an orphanage at Mbweni, Dar es Salaam</figcaption>
+          </figure>
+          <figure class="gal-item reveal" data-delay="2">
+            <img src="assets/img/tss.jpg" alt="Tabora Boys' alumni meetup at Kigamboni" loading="lazy" />
+            <figcaption class="gal-cap"><span class="gal-tag">Friends</span><br />With former classmates at Kigamboni, Dar es Salaam</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======= Contact ======= -->
+    <section id="contact">
+      <div class="container">
+        <div class="contact-wrap reveal">
+          <h2>Have an idea?<br /><span class="grad">Let's build it together.</span></h2>
+          <p>Whether it's a new product, a system that needs rescuing, or just a question — my inbox is always open.</p>
+          <a class="btn btn-primary" href="mailto:maswimrtz@gmail.com">maswimrtz@gmail.com</a>
+          <div class="contact-meta">
+            <span>📍 Kinondoni, Dar es Salaam</span>
+            <span>📞 <a href="tel:+255744033739">+255 744 033 739</a></span>
+            <span>📞 <a href="tel:+255786670024">+255 786 670 024</a></span>
+          </div>
+          <div class="contact-socials">
+            <a class="icon-link" href="https://github.com/mrblack360" target="_blank" rel="noopener" aria-label="GitHub">
+              <svg viewBox="0 0 24 24"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.1.79-.25.79-.55v-2.1c-3.2.7-3.87-1.36-3.87-1.36-.52-1.33-1.28-1.69-1.28-1.69-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.19 1.76 1.19 1.03 1.76 2.7 1.25 3.35.96.1-.75.4-1.25.72-1.54-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.78 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.8 1.19 1.83 1.19 3.09 0 4.42-2.7 5.39-5.27 5.67.41.36.78 1.06.78 2.14v3.17c0 .31.21.66.8.55A11.52 11.52 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"/></svg>
+            </a>
+            <a class="icon-link" href="https://www.linkedin.com/in/maswi-mussa-raphael-047a26b4/" target="_blank" rel="noopener" aria-label="LinkedIn">
+              <svg viewBox="0 0 24 24"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28ZM5.34 7.43a2.07 2.07 0 1 1 0-4.13 2.07 2.07 0 0 1 0 4.13ZM7.12 20.45H3.55V9h3.57v11.45Z"/></svg>
+            </a>
+            <a class="icon-link" href="https://twitter.com/maswimrt" target="_blank" rel="noopener" aria-label="X (Twitter)">
+              <svg viewBox="0 0 24 24"><path d="M18.24 2.25h3.31l-7.23 8.26 8.5 11.24h-6.66l-5.21-6.82-5.97 6.82H1.67l7.73-8.84L1.25 2.25h6.83l4.71 6.23 5.45-6.23Zm-1.16 17.52h1.83L7.08 4.13H5.12l11.96 15.64Z"/></svg>
+            </a>
+            <a class="icon-link" href="https://www.instagram.com/maswimr/" target="_blank" rel="noopener" aria-label="Instagram">
+              <svg viewBox="0 0 24 24"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.41a3.72 3.72 0 0 1-1.38-.9 3.72 3.72 0 0 1-.9-1.38c-.16-.42-.36-1.06-.41-2.23-.06-1.27-.07-1.65-.07-4.85s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41 1.27-.06 1.65-.07 4.85-.07ZM12 0C8.74 0 8.33.01 7.05.07 5.78.13 4.9.33 4.14.63a5.88 5.88 0 0 0-2.13 1.38A5.88 5.88 0 0 0 .63 4.14C.33 4.9.13 5.78.07 7.05.01 8.33 0 8.74 0 12s.01 3.67.07 4.95c.06 1.27.26 2.15.56 2.91.31.8.72 1.47 1.38 2.13a5.88 5.88 0 0 0 2.13 1.38c.76.3 1.64.5 2.91.56C8.33 23.99 8.74 24 12 24s3.67-.01 4.95-.07c1.27-.06 2.15-.26 2.91-.56a5.88 5.88 0 0 0 2.13-1.38 5.88 5.88 0 0 0 1.38-2.13c.3-.76.5-1.64.56-2.91.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95c-.06-1.27-.26-2.15-.56-2.91a5.88 5.88 0 0 0-1.38-2.13A5.88 5.88 0 0 0 19.86.63c-.76-.3-1.64-.5-2.91-.56C15.67.01 15.26 0 12 0Zm0 5.84a6.16 6.16 0 1 0 0 12.32 6.16 6.16 0 0 0 0-12.32ZM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8Zm7.85-10.4a1.44 1.44 0 1 1-2.88 0 1.44 1.44 0 0 1 2.88 0Z"/></svg>
+            </a>
+            <a class="icon-link" href="https://www.facebook.com/raphael.raphael.165" target="_blank" rel="noopener" aria-label="Facebook">
+              <svg viewBox="0 0 24 24"><path d="M24 12.07C24 5.4 18.63 0 12 0S0 5.4 0 12.07C0 18.1 4.39 23.09 10.13 24v-8.44H7.08v-3.49h3.05V9.41c0-3.02 1.79-4.7 4.53-4.7 1.31 0 2.69.24 2.69.24v2.97h-1.52c-1.49 0-1.95.93-1.95 1.89v2.26h3.32l-.53 3.49h-2.79V24C19.61 23.09 24 18.1 24 12.07Z"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
   </main>
-  <!-- End #main -->
 
   <!-- ======= Footer ======= -->
   <footer>
     <div class="container">
-      <div class="row">
-        <div class="col-sm-12">
-          <div class="copyright-box">
-            <p class="copyright">
-              &copy; Copyright <strong><a href="https://maswimr.website/" style="color: white;">Maswi, MR</a></strong>.
-              Some Rights Reserved
-            </p>
-          </div>
-        </div>
+      <div class="footer-inner">
+        <span>© <span id="year"></span> <a class="grad" href="https://www.maswimr.website/">Maswi, MR</a>. Some rights reserved.</span>
+        <span>Dar es Salaam, Tanzania 🇹🇿</span>
       </div>
     </div>
   </footer>
-  <!-- End  Footer -->
 
-  <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
-  <div id="preloader"></div>
+  <a href="#home" class="back-top" aria-label="Back to top">↑</a>
 
-  <!-- Vendor JS Files -->
-  <script src="assets/vendor/jquery/jquery.min.js"></script>
-  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="assets/vendor/jquery.easing/jquery.easing.min.js"></script>
-  <script src="assets/vendor/php-email-form/validate.js"></script>
-  <script src="assets/vendor/waypoints/jquery.waypoints.min.js"></script>
-  <script src="assets/vendor/counterup/jquery.counterup.min.js"></script>
-  <script src="assets/vendor/owl.carousel/owl.carousel.min.js"></script>
-  <script src="assets/vendor/typed.js/typed.min.js"></script>
-  <script src="assets/vendor/venobox/venobox.min.js"></script>
-  <script src="https://platform.linkedin.com/badges/js/profile.js" async defer type="text/javascript"></script>
+  <script>
+    // Typed roles
+    const roles = [
+      "Software Developer",
+      "Certified DHIS2 Expert",
+      "GeoNode Expert",
+      "Revenue Assurance (CARA)",
+      "Full-stack Engineer"
+    ];
+    const typedEl = document.querySelector(".typed");
+    let roleIdx = 0, charIdx = 0, deleting = false;
+    function typeLoop() {
+      const word = roles[roleIdx];
+      typedEl.textContent = word.slice(0, charIdx);
+      let delay = deleting ? 38 : 75;
+      if (!deleting && charIdx === word.length) { delay = 1800; deleting = true; }
+      else if (deleting && charIdx === 0) { deleting = false; roleIdx = (roleIdx + 1) % roles.length; delay = 350; }
+      else charIdx += deleting ? -1 : 1;
+      setTimeout(typeLoop, delay);
+    }
+    typeLoop();
 
-  <!-- Template Main JS File -->
-  <script src="assets/js/main.js"></script>
+    // Scroll reveal
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.12 });
+    document.querySelectorAll(".reveal").forEach((el) => io.observe(el));
+
+    // Animated counters
+    const counterIO = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (!e.isIntersecting) return;
+        counterIO.unobserve(e.target);
+        const el = e.target;
+        const target = +el.dataset.count;
+        const suffix = el.dataset.suffix || "";
+        const dur = 1400;
+        const t0 = performance.now();
+        (function tick(t) {
+          const p = Math.min((t - t0) / dur, 1);
+          el.textContent = Math.round(target * (1 - Math.pow(1 - p, 3))) + suffix;
+          if (p < 1) requestAnimationFrame(tick);
+        })(t0);
+      });
+    }, { threshold: 0.5 });
+    document.querySelectorAll(".stat-num").forEach((el) => counterIO.observe(el));
+
+    // Scroll progress + back-to-top
+    const progress = document.querySelector(".scroll-progress");
+    const backTop = document.querySelector(".back-top");
+    addEventListener("scroll", () => {
+      const h = document.documentElement;
+      progress.style.width = (h.scrollTop / (h.scrollHeight - h.clientHeight)) * 100 + "%";
+      backTop.classList.toggle("show", h.scrollTop > 600);
+    }, { passive: true });
+
+    // Mouse-follow glow on project cards
+    document.querySelectorAll(".proj-card").forEach((card) => {
+      card.addEventListener("pointermove", (e) => {
+        const r = card.getBoundingClientRect();
+        card.style.setProperty("--mx", e.clientX - r.left + "px");
+        card.style.setProperty("--my", e.clientY - r.top + "px");
+      });
+    });
+
+    // Mobile menu
+    const burger = document.querySelector(".nav-burger");
+    const menu = document.querySelector(".mobile-menu");
+    burger.addEventListener("click", () => {
+      const open = document.body.classList.toggle("menu-open");
+      menu.classList.toggle("open", open);
+      burger.setAttribute("aria-expanded", open);
+    });
+    menu.querySelectorAll("a").forEach((a) =>
+      a.addEventListener("click", () => {
+        document.body.classList.remove("menu-open");
+        menu.classList.remove("open");
+        burger.setAttribute("aria-expanded", "false");
+      })
+    );
+
+    // Active nav link on scroll
+    const sections = [...document.querySelectorAll("section[id]")];
+    const navLinks = [...document.querySelectorAll(".nav-links a")];
+    const sectionIO = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (!e.isIntersecting) return;
+        navLinks.forEach((a) => a.classList.toggle("active", a.getAttribute("href") === "#" + e.target.id));
+      });
+    }, { rootMargin: "-40% 0px -55% 0px" });
+    sections.forEach((s) => sectionIO.observe(s));
+
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
 </body>
 
 </html>
