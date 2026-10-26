@@ -1,0 +1,9 @@
+{
+  "name": "maswimr-website",
+  "version": "2.0.0",
+  "private": true,
+  "description": "Personal portfolio of Maswi, Mussa Raphael — static site, no build step",
+  "engines": {
+    "node": "24.x"
+  }
+}
