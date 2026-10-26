@@ -30,11 +30,25 @@
       --paper: #ece8e0;
       --paper-dim: #9b978f;
       --line: rgba(236, 232, 224, 0.14);
+      --stroke-faint: rgba(236, 232, 224, 0.4);
+      --ring-border: rgba(236, 232, 224, 0.5);
       --accent: #4d7aff;
       --font-display: "Anton", sans-serif;
       --font-serif: "Instrument Serif", serif;
       --font-body: "Space Grotesk", sans-serif;
     }
+    [data-theme="light"] {
+      --ink: #efece5;
+      --ink-2: #e6e2d9;
+      --paper: #121212;
+      --paper-dim: #6d6a63;
+      --line: rgba(18, 18, 18, 0.14);
+      --stroke-faint: rgba(18, 18, 18, 0.35);
+      --ring-border: rgba(18, 18, 18, 0.45);
+      --accent: #3056f0;
+    }
+    html { transition: background 0.4s; }
+    body, .preloader, .about-fig figcaption, .svc-row, .menu { transition: background-color 0.4s, color 0.4s; }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -111,7 +125,7 @@
     .cursor-dot { width: 7px; height: 7px; background: var(--accent); }
     .cursor-ring {
       width: 36px; height: 36px;
-      border: 1px solid rgba(236, 232, 224, 0.5);
+      border: 1px solid var(--ring-border);
       transition: width 0.3s, height 0.3s, background 0.3s, border-color 0.3s;
       display: grid;
       place-items: center;
@@ -136,7 +150,24 @@
       justify-content: space-between;
       padding: 22px 5vw;
       mix-blend-mode: difference;
+      transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
     }
+    .topbar.hidden { transform: translateY(-120%); }
+    .topbar .top-actions { display: flex; align-items: center; gap: 22px; }
+    .theme-btn {
+      background: none;
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      color: #fff;
+      width: 32px; height: 32px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      font-size: 15px;
+      line-height: 1;
+      cursor: pointer;
+      transition: transform 0.3s;
+    }
+    .theme-btn:hover { transform: rotate(40deg); }
     .topbar .brand {
       font-family: var(--font-display);
       font-size: 19px;
@@ -256,6 +287,15 @@
       padding-bottom: 6vh;
       padding-top: 16vh;
     }
+    .hero-dots {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+    }
+    .hero > *:not(.hero-dots):not(.spin-badge) { position: relative; z-index: 1; }
+    .hero h1 .ch { display: inline-block; will-change: transform; }
+    .hero h1 [data-chars] { white-space: nowrap; }
     .hero-eyebrow {
       display: flex;
       align-items: center;
@@ -502,6 +542,52 @@
       .svc-row { grid-template-columns: 1fr; gap: 10px; }
     }
 
+    /* ---------- Stack ---------- */
+    .stack-head {
+      margin-top: 10vh;
+      margin-bottom: 4vh;
+      display: flex;
+      align-items: baseline;
+      gap: 18px;
+      font-size: 13px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--paper-dim);
+    }
+    .stack-head::after { content: ""; flex: 1; height: 1px; background: var(--line); }
+    .stack-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      border: 1px solid var(--line);
+    }
+    .stack-cell {
+      padding: 26px 22px;
+      border-right: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      transition: background 0.3s, color 0.3s;
+      cursor: default;
+    }
+    .stack-cell:nth-child(4n) { border-right: 0; }
+    .stack-cell:nth-child(n+5) { border-bottom: 0; }
+    .stack-cell:hover { background: var(--accent); }
+    .stack-cell:hover b, .stack-cell:hover span { color: #fff; }
+    .stack-cell b {
+      display: block;
+      font-family: var(--font-display);
+      font-weight: 400;
+      font-size: clamp(18px, 1.8vw, 24px);
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+    .stack-cell span { display: block; margin-top: 6px; font-size: 13px; color: var(--paper-dim); transition: color 0.3s; }
+    @media (max-width: 760px) {
+      .stack-grid { grid-template-columns: repeat(2, 1fr); }
+      .stack-cell:nth-child(2n) { border-right: 0; }
+      .stack-cell:nth-child(odd) { border-right: 1px solid var(--line); }
+      .stack-cell { border-bottom: 1px solid var(--line) !important; }
+      .stack-cell:nth-last-child(-n+2) { border-bottom: 0 !important; }
+    }
+
     /* ---------- Experience ---------- */
     .xp-row {
       border-top: 1px solid var(--line);
@@ -708,6 +794,81 @@
     }
     .contact .c-meta a:hover { color: var(--accent); }
 
+    .c-form {
+      margin: 7vh auto 0;
+      max-width: 680px;
+      width: 100%;
+      text-align: left;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0 28px;
+    }
+    .c-form .field { grid-column: span 1; padding: 18px 0 6px; }
+    .c-form .field.full { grid-column: span 2; }
+    .c-form label {
+      display: block;
+      font-size: 11.5px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--paper-dim);
+      margin-bottom: 8px;
+    }
+    .c-form input, .c-form textarea {
+      width: 100%;
+      background: none;
+      border: 0;
+      border-bottom: 1px solid var(--line);
+      color: var(--paper);
+      font-family: var(--font-body);
+      font-size: 17px;
+      padding: 8px 0 14px;
+      outline: none;
+      transition: border-color 0.3s;
+      resize: vertical;
+    }
+    .c-form input:focus, .c-form textarea:focus { border-color: var(--accent); }
+    .c-form button {
+      grid-column: span 2;
+      justify-self: center;
+      margin-top: 36px;
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      background: var(--accent);
+      color: #fff;
+      border: 0;
+      font-size: 16px;
+      font-weight: 500;
+      padding: 18px 46px;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: transform 0.3s, filter 0.3s;
+      will-change: transform;
+    }
+    .c-form button:hover { filter: brightness(1.15); }
+    .form-note {
+      grid-column: span 2;
+      margin-top: 18px;
+      text-align: center;
+      font-size: 13px;
+      color: var(--paper-dim);
+    }
+    .form-ok {
+      grid-column: span 2;
+      display: none;
+      margin-top: 22px;
+      text-align: center;
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-size: 20px;
+      color: var(--accent);
+    }
+    .form-ok.show { display: block; }
+    @media (max-width: 680px) {
+      .c-form { grid-template-columns: 1fr; }
+      .c-form .field, .c-form .field.full, .c-form button, .form-note, .form-ok { grid-column: span 1; }
+    }
+
     /* ---------- Footer ---------- */
     footer { border-top: 1px solid var(--line); padding-top: 5vh; }
     .foot-top {
@@ -732,7 +893,7 @@
       text-transform: uppercase;
       text-align: center;
       color: transparent;
-      -webkit-text-stroke: 1.5px rgba(236, 232, 224, 0.4);
+      -webkit-text-stroke: 1.5px var(--stroke-faint);
       transform: translateY(0.12em);
       user-select: none;
       transition: color 0.6s, -webkit-text-stroke-color 0.6s;
@@ -757,7 +918,34 @@
       .marquee .track, .spin-badge svg, .grain { animation: none !important; }
     }
   </style>
-  <script>document.documentElement.classList.add("js");</script>
+  <script>
+    document.documentElement.classList.add("js");
+    try {
+      const t = localStorage.getItem("theme");
+      if (t === "light") document.documentElement.setAttribute("data-theme", "light");
+    } catch (e) {}
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Maswi, Mussa Raphael",
+    "alternateName": "Maswi MR",
+    "url": "https://www.maswimr.website/",
+    "image": "https://www.maswimr.website/assets/img/maswi.jpg",
+    "jobTitle": "Software Developer",
+    "worksFor": { "@type": "Organization", "name": "Airtel Tanzania" },
+    "alumniOf": { "@type": "CollegeOrUniversity", "name": "University of Dar es Salaam" },
+    "address": { "@type": "PostalAddress", "addressLocality": "Dar es Salaam", "addressCountry": "TZ" },
+    "email": "mailto:maswimrtz@gmail.com",
+    "sameAs": [
+      "https://github.com/mrblack360",
+      "https://www.linkedin.com/in/maswi-mussa-raphael-047a26b4/",
+      "https://twitter.com/maswimrt",
+      "https://www.instagram.com/maswimr/"
+    ]
+  }
+  </script>
 </head>
 
 <body>
@@ -774,10 +962,13 @@
   <header class="topbar">
     <a class="brand" href="#top">Maswi MR<sup>®</sup></a>
     <div class="top-meta">Software Developer — Dar es Salaam <span data-local-time></span></div>
-    <button class="menu-btn" aria-label="Open menu" aria-expanded="false">
-      <span class="menu-word">Menu</span>
-      <span class="bars"><span></span><span></span></span>
-    </button>
+    <div class="top-actions">
+      <button class="theme-btn" aria-label="Toggle light and dark theme">◐</button>
+      <button class="menu-btn" aria-label="Open menu" aria-expanded="false">
+        <span class="menu-word">Menu</span>
+        <span class="bars"><span></span><span></span></span>
+      </button>
+    </div>
   </header>
 
   <nav class="menu" aria-hidden="true">
@@ -797,6 +988,7 @@
   <main id="top">
     <!-- ================= HERO ================= -->
     <section class="hero wrap">
+      <canvas class="hero-dots" aria-hidden="true"></canvas>
       <div class="spin-badge" aria-hidden="true">
         <svg viewBox="0 0 100 100">
           <defs><path id="circ" d="M 50,50 m -38,0 a 38,38 0 1,1 76,0 a 38,38 0 1,1 -76,0" /></defs>
@@ -809,8 +1001,9 @@
       </div>
 
       <h1 aria-label="Maswi Mussa Raphael">
-        <span class="mask"><span class="row">Maswi<span class="hero-inline-img"><img src="assets/img/maswi.jpg" alt="Portrait of Maswi, Mussa Raphael" /></span></span></span>
-        <span class="mask"><span class="row"><span class="outline">Mussa Raphael</span></span></span>
+        <span class="mask"><span class="row"><span data-chars>Maswi</span><span class="hero-inline-img"><img src="assets/img/maswi.jpg" alt="Portrait of Maswi, Mussa Raphael" /></span></span></span>
+        <span class="mask"><span class="row"><span class="outline" data-chars>Mussa</span></span></span>
+        <span class="mask"><span class="row"><span class="outline" data-chars>Raphael</span></span></span>
       </h1>
 
       <div class="hero-sub">
@@ -898,6 +1091,18 @@
           <h3>Data Collection &amp; Analysis</h3>
           <p>Collecting, measuring and analyzing accurate insights for research using standard validated techniques.</p>
         </div>
+      </div>
+
+      <div class="stack-head" data-reveal>Tools I reach for</div>
+      <div class="stack-grid" data-reveal>
+        <div class="stack-cell"><b>Python</b><span>Automation &amp; data</span></div>
+        <div class="stack-cell"><b>TypeScript</b><span>Typed web apps</span></div>
+        <div class="stack-cell"><b>JavaScript</b><span>The web, everywhere</span></div>
+        <div class="stack-cell"><b>Dart</b><span>Flutter &amp; mobile</span></div>
+        <div class="stack-cell"><b>Java</b><span>Enterprise systems</span></div>
+        <div class="stack-cell"><b>DHIS2</b><span>Health information</span></div>
+        <div class="stack-cell"><b>GeoNode</b><span>Geospatial data</span></div>
+        <div class="stack-cell"><b>Shell &amp; Linux</b><span>Tooling &amp; ops</span></div>
       </div>
     </section>
 
@@ -1038,6 +1243,27 @@
         <a href="tel:+255744033739">+255 744 033 739</a>
         <a href="tel:+255786670024">+255 786 670 024</a>
       </div>
+
+      <form class="c-form" action="https://formsubmit.co/maswimrtz@gmail.com" method="POST">
+        <input type="hidden" name="_subject" value="New message from maswimr.website" />
+        <input type="hidden" name="_next" value="https://www.maswimr.website/?sent=1#contact" />
+        <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off" />
+        <div class="field">
+          <label for="f-name">Your name</label>
+          <input id="f-name" type="text" name="name" required autocomplete="name" />
+        </div>
+        <div class="field">
+          <label for="f-email">Your email</label>
+          <input id="f-email" type="email" name="email" required autocomplete="email" />
+        </div>
+        <div class="field full">
+          <label for="f-msg">What are we building?</label>
+          <textarea id="f-msg" name="message" rows="4" required></textarea>
+        </div>
+        <button type="submit" data-magnetic>Send message <span>→</span></button>
+        <p class="form-ok">Asante! Your message is on its way — I'll get back to you soon.</p>
+        <p class="form-note">Or just email me directly — the button above works too.</p>
+      </form>
     </section>
   </main>
 
@@ -1171,9 +1397,26 @@
         });
       }
 
+      // Theme toggle
+      const themeBtn = document.querySelector(".theme-btn");
+      themeBtn.addEventListener("click", () => {
+        const light = document.documentElement.getAttribute("data-theme") !== "light";
+        if (light) document.documentElement.setAttribute("data-theme", "light");
+        else document.documentElement.removeAttribute("data-theme");
+        try { localStorage.setItem("theme", light ? "light" : "dark"); } catch (e) {}
+      });
+
+      // Split hero headline into characters
+      document.querySelectorAll("[data-chars]").forEach((el) => {
+        el.innerHTML = el.textContent.split("").map((c) =>
+          c === " " ? " " : `<span class="ch">${c}</span>`
+        ).join("");
+      });
+
       // Hero intro + preloader
       const introTl = gsap.timeline({ paused: true })
-        .fromTo(".hero h1 .mask > *", { yPercent: 110 }, { yPercent: 0, duration: 1.1, stagger: 0.12, ease: "power4.out" })
+        .fromTo(".hero h1 .ch", { yPercent: 115 }, { yPercent: 0, duration: 0.9, stagger: 0.028, ease: "power4.out" })
+        .fromTo(".hero-inline-img", { scale: 0, rotate: -20 }, { scale: 1, rotate: 0, duration: 0.8, ease: "back.out(1.6)" }, "-=0.6")
         .fromTo(".hero-eyebrow .mask > *, .hero-sub .mask > *", { yPercent: 120 }, { yPercent: 0, duration: 0.9, stagger: 0.08, ease: "power3.out" }, "-=0.7")
         .fromTo(".spin-badge, .topbar", { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.8 }, "-=0.5");
 
@@ -1305,6 +1548,101 @@
           yPercent: 0, autoAlpha: 1, duration: 1, ease: "power3.out",
           scrollTrigger: { trigger: "footer", start: "top 85%" }
         });
+      }
+
+      // Topbar: hide on scroll down, show on scroll up
+      const topbar = document.querySelector(".topbar");
+      let lastY = 0;
+      const onScrollY = (y) => {
+        if (!menuOpen) topbar.classList.toggle("hidden", y > lastY && y > 300);
+        lastY = y;
+      };
+      if (lenis) lenis.on("scroll", ({ scroll }) => onScrollY(scroll));
+      else addEventListener("scroll", () => onScrollY(scrollY), { passive: true });
+
+      // Velocity skew on marquee + footer name
+      if (!reduced) {
+        const skewTargets = [".marquee .track", ".foot-name"];
+        const proxy = { skew: 0 };
+        const setters = skewTargets.map((t) => gsap.quickSetter(t, "skewX", "deg"));
+        ScrollTrigger.create({
+          onUpdate: (self) => {
+            const v = gsap.utils.clamp(-9, 9, self.getVelocity() / -350);
+            if (Math.abs(v) > Math.abs(proxy.skew)) {
+              proxy.skew = v;
+              gsap.to(proxy, {
+                skew: 0, duration: 0.7, ease: "power3",
+                overwrite: true,
+                onUpdate: () => setters.forEach((s) => s(proxy.skew))
+              });
+            }
+          }
+        });
+      }
+
+      // Hero interactive dot field
+      const canvas = document.querySelector(".hero-dots");
+      if (canvas && fine && !reduced) {
+        const ctx = canvas.getContext("2d");
+        const hero = canvas.parentElement;
+        let dots = [], w = 0, h = 0, raf = null, visible = true;
+        const dpr = Math.min(devicePixelRatio || 1, 2);
+        const mouse = { x: -9999, y: -9999 };
+        const accentColor = () =>
+          getComputedStyle(document.documentElement).getPropertyValue("--accent").trim() || "#4d7aff";
+        const build = () => {
+          const r = hero.getBoundingClientRect();
+          w = r.width; h = r.height;
+          canvas.width = w * dpr; canvas.height = h * dpr;
+          ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+          dots = [];
+          const gap = 44;
+          for (let x = gap / 2; x < w; x += gap)
+            for (let y = gap / 2; y < h; y += gap)
+              dots.push({ hx: x, hy: y, x, y });
+        };
+        const step = () => {
+          ctx.clearRect(0, 0, w, h);
+          ctx.fillStyle = accentColor();
+          for (const d of dots) {
+            const dx = d.x - mouse.x, dy = d.y - mouse.y;
+            const dist = Math.hypot(dx, dy);
+            if (dist < 130 && dist > 0.1) {
+              const f = (130 - dist) / 130 * 2.4;
+              d.x += (dx / dist) * f;
+              d.y += (dy / dist) * f;
+            }
+            d.x += (d.hx - d.x) * 0.08;
+            d.y += (d.hy - d.y) * 0.08;
+            const away = Math.hypot(d.x - d.hx, d.y - d.hy);
+            ctx.globalAlpha = Math.min(0.14 + away * 0.06, 0.8);
+            ctx.beginPath();
+            ctx.arc(d.x, d.y, 1.4, 0, 6.2832);
+            ctx.fill();
+          }
+          ctx.globalAlpha = 1;
+          raf = visible ? requestAnimationFrame(step) : null;
+        };
+        hero.addEventListener("pointermove", (e) => {
+          const r = canvas.getBoundingClientRect();
+          mouse.x = e.clientX - r.left; mouse.y = e.clientY - r.top;
+        });
+        hero.addEventListener("pointerleave", () => { mouse.x = -9999; mouse.y = -9999; });
+        new IntersectionObserver(([en]) => {
+          visible = en.isIntersecting;
+          if (visible && !raf) raf = requestAnimationFrame(step);
+        }).observe(hero);
+        addEventListener("resize", build);
+        build();
+        raf = requestAnimationFrame(step);
+      }
+
+      // Contact form sent confirmation
+      if (new URLSearchParams(location.search).has("sent")) {
+        const ok = document.querySelector(".form-ok");
+        if (ok) ok.classList.add("show");
+        setTimeout(() => scrollToEl("#contact"), reduced ? 0 : 600);
+        history.replaceState(null, "", location.pathname + "#contact");
       }
     })();
   </script>
