@@ -215,7 +215,7 @@
     .menu.open { visibility: visible; }
     .menu a.menu-link {
       font-family: var(--font-display);
-      font-size: clamp(44px, 9vw, 110px);
+      font-size: clamp(34px, 7.4vw, 92px);
       line-height: 1.02;
       text-transform: uppercase;
       display: flex;
@@ -732,6 +732,100 @@
     .proj-preview img.on { opacity: 1; }
     @media (hover: none), (max-width: 860px) { .proj-preview { display: none; } }
 
+    /* ---------- System console ---------- */
+    .console {
+      display: grid;
+      grid-template-columns: 1.35fr 1fr;
+      gap: 16px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    }
+    .con-win {
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: var(--ink-2);
+      overflow: hidden;
+    }
+    .con-bar {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      padding: 11px 14px;
+      border-bottom: 1px solid var(--line);
+      font-size: 11.5px;
+      letter-spacing: 0.08em;
+      color: var(--paper-dim);
+    }
+    .con-bar i { width: 10px; height: 10px; border-radius: 50%; background: var(--line); }
+    .con-bar i:nth-child(1) { background: #ff5f57; }
+    .con-bar i:nth-child(2) { background: #febc2e; }
+    .con-bar i:nth-child(3) { background: #28c840; }
+    .con-bar span { margin-left: 8px; }
+    .term-body {
+      padding: 18px 16px 22px;
+      font-size: 13px;
+      line-height: 1.75;
+      min-height: 280px;
+    }
+    .term-body .t-cmd { color: var(--paper); }
+    .term-body .t-cmd::before { content: "$ "; color: var(--accent); }
+    .term-body .t-out { color: var(--paper-dim); }
+    .term-body .t-ok { color: #28c840; }
+    .term-caret {
+      display: inline-block;
+      width: 8px; height: 15px;
+      background: var(--accent);
+      vertical-align: text-bottom;
+      animation: blink 1s step-end infinite;
+    }
+    @keyframes blink { 50% { opacity: 0; } }
+    .con-side {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      align-content: start;
+    }
+    .tile { padding: 16px 16px 14px; position: relative; }
+    .tile label, .chart-win label, .con-log label {
+      display: block;
+      font-size: 10.5px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--paper-dim);
+      margin-bottom: 8px;
+    }
+    .tile b {
+      font-size: clamp(20px, 2vw, 27px);
+      font-weight: 500;
+      color: var(--paper);
+      font-variant-numeric: tabular-nums;
+    }
+    .tile .unit { font-size: 13px; color: var(--paper-dim); }
+    .tile .ping {
+      position: absolute;
+      top: 16px; right: 14px;
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: #28c840;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(40, 200, 64, 0.55); }
+      70% { box-shadow: 0 0 0 9px rgba(40, 200, 64, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(40, 200, 64, 0); }
+    }
+    .chart-win { grid-column: span 2; padding: 16px 16px 10px; }
+    .chart-win svg { width: 100%; height: 86px; display: block; }
+    .chart-line { fill: none; stroke: var(--accent); stroke-width: 2; }
+    .chart-fill { fill: var(--accent); opacity: 0.12; stroke: none; }
+    .con-log { grid-column: 1 / -1; padding: 14px 16px 16px; }
+    .log-lines { font-size: 12px; line-height: 1.9; color: var(--paper-dim); min-height: 90px; }
+    .log-lines .l-new { color: var(--paper); }
+    .log-lines b { color: var(--accent); font-weight: 500; }
+    @media (max-width: 860px) {
+      .console { grid-template-columns: 1fr; }
+      .term-body { min-height: 230px; }
+    }
+
     /* ---------- Gallery (horizontal) ---------- */
     .gal-sec { overflow: hidden; }
     .gal-track {
@@ -1013,8 +1107,9 @@
     <a class="menu-link" href="#services"><sup>02</sup>Services</a>
     <a class="menu-link" href="#experience"><sup>03</sup>Experience</a>
     <a class="menu-link" href="#work"><sup>04</sup>Work</a>
-    <a class="menu-link" href="#gallery"><sup>05</sup>Gallery</a>
-    <a class="menu-link" href="#contact"><sup>06</sup>Contact</a>
+    <a class="menu-link" href="#system"><sup>05</sup>System</a>
+    <a class="menu-link" href="#gallery"><sup>06</sup>Gallery</a>
+    <a class="menu-link" href="#contact"><sup>07</sup>Contact</a>
     <div class="menu-foot">
       <span>maswimrtz@gmail.com</span>
       <span>+255 744 033 739</span>
@@ -1229,12 +1324,59 @@
 
     <div class="spacer"></div>
 
+    <!-- ================= SYSTEM ================= -->
+    <section id="system" class="wrap">
+      <div class="sec-head">
+        <h2>A system <span class="serif">alive</span></h2>
+        <span class="sec-no">05 — Ops console · simulation</span>
+      </div>
+      <div class="console">
+        <div class="con-win">
+          <div class="con-bar"><i></i><i></i><i></i><span>maswi@dar-es-salaam — ~/ops</span></div>
+          <div class="term-body"><span class="term-lines"></span><span class="term-caret"></span></div>
+        </div>
+        <div class="con-side">
+          <div class="con-win tile">
+            <label>Uptime</label>
+            <b>99.98<span class="unit">%</span></b>
+            <span class="ping"></span>
+          </div>
+          <div class="con-win tile">
+            <label>Requests today</label>
+            <b data-sys-req>0</b>
+          </div>
+          <div class="con-win tile">
+            <label>Latency</label>
+            <b><span data-sys-lat>24</span><span class="unit">ms</span></b>
+          </div>
+          <div class="con-win tile">
+            <label>Services green</label>
+            <b>6<span class="unit">/6</span></b>
+            <span class="ping"></span>
+          </div>
+          <div class="con-win chart-win">
+            <label>Throughput — req/s</label>
+            <svg viewBox="0 0 300 86" preserveAspectRatio="none" aria-hidden="true">
+              <polygon class="chart-fill" points=""></polygon>
+              <polyline class="chart-line" points=""></polyline>
+            </svg>
+          </div>
+        </div>
+        <div class="con-win con-log">
+          <label>Live log</label>
+          <div class="log-lines"></div>
+        </div>
+      </div>
+    </section>
+
+    <div class="spacer"></div>
+
     <!-- ================= GALLERY ================= -->
     <section id="gallery">
       <div class="wrap">
         <div class="sec-head">
           <h2>Off the <span class="serif">keyboard</span></h2>
-          <span class="sec-no">05 — Gallery · drag →</span>
+          <span class="sec-no">06 — Gallery · drag →</span>
         </div>
       </div>
       <div class="gal-sec">
@@ -1802,6 +1944,177 @@
         addEventListener("resize", build);
         build();
         raf = requestAnimationFrame(step);
+      }
+
+      // Section background morph
+      const BG_STOPS = [
+        { sel: "#top",        dark: "#0b0b0b", light: "#efece5" },
+        { sel: "#about",      dark: "#0b0b0b", light: "#efece5" },
+        { sel: "#services",   dark: "#0e0d13", light: "#ece9e2" },
+        { sel: "#experience", dark: "#0b0e16", light: "#e9ebf0" },
+        { sel: "#work",       dark: "#0d0c12", light: "#ece9e2" },
+        { sel: "#system",     dark: "#070b15", light: "#e5e9f3" },
+        { sel: "#gallery",    dark: "#0b0b0b", light: "#efece5" },
+        { sel: "#contact",    dark: "#0a0f26", light: "#e2e7f8" }
+      ];
+      let bgIndex = 0;
+      const applyBg = (instant) => {
+        const light = document.documentElement.getAttribute("data-theme") === "light";
+        const c = light ? BG_STOPS[bgIndex].light : BG_STOPS[bgIndex].dark;
+        if (instant || reduced) gsap.set("html", { "--ink": c });
+        else gsap.to("html", { "--ink": c, duration: 1, ease: "power2.out", overwrite: "auto" });
+      };
+      if (!reduced) {
+        BG_STOPS.forEach((stop, i) => {
+          const el = document.querySelector(stop.sel);
+          if (!el) return;
+          ScrollTrigger.create({
+            trigger: el,
+            start: "top 55%",
+            end: "bottom 55%",
+            onEnter: () => { bgIndex = i; applyBg(); },
+            onEnterBack: () => { bgIndex = i; applyBg(); }
+          });
+        });
+        themeBtn.addEventListener("click", () => applyBg(true));
+      }
+
+      // Live ops console
+      const consoleEl = document.querySelector(".console");
+      if (consoleEl) {
+        const termLines = consoleEl.querySelector(".term-lines");
+        const caret = consoleEl.querySelector(".term-caret");
+        const reqEl = consoleEl.querySelector("[data-sys-req]");
+        const latEl = consoleEl.querySelector("[data-sys-lat]");
+        const lineEl = consoleEl.querySelector(".chart-line");
+        const fillEl = consoleEl.querySelector(".chart-fill");
+        const logEl = consoleEl.querySelector(".log-lines");
+
+        const SCRIPT = [
+          { cmd: "maswi deploy --service revenue-assurance", out: ["→ building image… done (2.1s)", "→ rolling out to 3 nodes… done", "✓ service healthy — 0 dropped requests"] },
+          { cmd: "maswi sync dhis2 --region mwanza", out: ["→ pulling 1,284 facility records", "→ validating datasets… ok", "✓ synced in 3.7s"] },
+          { cmd: "maswi monitor kandanda-api", out: ["→ 200 OK · 34ms · /fixtures/today", "→ 200 OK · 28ms · /league/standings", "✓ all probes green"] }
+        ];
+        const LOGS = [
+          ["GET /api/v1/schools", "200", "12ms"],
+          ["GET /fixtures/today", "200", "28ms"],
+          ["POST /dhis2/datasets/sync", "202", "341ms"],
+          ["GET /ra/alerts/daily", "200", "19ms"],
+          ["queue:reconciliation", "consumed", "14 msgs"],
+          ["GET /psaims/results/summary", "200", "23ms"],
+          ["cron:backup-db", "finished", "4.2s"],
+          ["GET /start/links", "200", "8ms"]
+        ];
+
+        let sysActive = false, timers = [];
+        const later = (fn, ms) => { const t = setTimeout(fn, ms); timers.push(t); return t; };
+        const every = (fn, ms) => { const t = setInterval(fn, ms); timers.push(t); return t; };
+
+        // Chart state
+        let pts = Array.from({ length: 48 }, () => 40 + Math.random() * 12);
+        const drawChart = () => {
+          const step = 300 / (pts.length - 1);
+          const line = pts.map((v, i) => `${(i * step).toFixed(1)},${(86 - v).toFixed(1)}`).join(" ");
+          lineEl.setAttribute("points", line);
+          fillEl.setAttribute("points", `0,86 ${line} 300,86`);
+        };
+        const tickChart = () => {
+          const last = pts[pts.length - 1];
+          pts.push(Math.max(12, Math.min(76, last + (Math.random() - 0.48) * 14)));
+          pts.shift();
+          drawChart();
+        };
+
+        // Counters
+        let reqCount = 1203457;
+        const fmtInt = (n) => n.toLocaleString("en-US");
+
+        // Terminal typing loop
+        let si = 0;
+        const typeCmd = () => {
+          if (!sysActive) return;
+          if (si === 0 && termLines.childNodes.length) termLines.innerHTML = "";
+          const { cmd, out } = SCRIPT[si];
+          const row = document.createElement("div");
+          row.className = "t-cmd";
+          termLines.appendChild(row);
+          let ci = 0;
+          const typer = every(() => {
+            row.textContent = cmd.slice(0, ++ci);
+            if (ci >= cmd.length) {
+              clearInterval(typer);
+              out.forEach((o, i) =>
+                later(() => {
+                  const ol = document.createElement("div");
+                  ol.className = o.startsWith("✓") ? "t-out t-ok" : "t-out";
+                  ol.textContent = o;
+                  termLines.appendChild(ol);
+                  if (i === out.length - 1) {
+                    si = (si + 1) % SCRIPT.length;
+                    later(typeCmd, si === 0 ? 2600 : 900);
+                  }
+                }, 320 * (i + 1))
+              );
+            }
+          }, 34);
+        };
+
+        // Log stream
+        const darTime = () => new Intl.DateTimeFormat("en-GB", { hour: "2-digit", minute: "2-digit", second: "2-digit", timeZone: "Africa/Dar_es_Salaam" }).format(new Date());
+        const pushLog = () => {
+          const [path, code, ms] = LOGS[(Math.random() * LOGS.length) | 0];
+          const div = document.createElement("div");
+          div.className = "l-new";
+          div.innerHTML = `[${darTime()}] ${path} <b>${code}</b> ${ms}`;
+          logEl.appendChild(div);
+          later(() => div.classList.remove("l-new"), 600);
+          while (logEl.children.length > 4) logEl.firstChild.remove();
+        };
+
+        const startSys = () => {
+          if (sysActive) return;
+          sysActive = true;
+          typeCmd();
+          every(tickChart, 700);
+          every(() => { reqCount += 17 + ((Math.random() * 60) | 0); reqEl.textContent = fmtInt(reqCount); }, 360);
+          every(() => { latEl.textContent = 18 + ((Math.random() * 14) | 0); }, 1400);
+          every(pushLog, 1100);
+        };
+        const stopSys = () => {
+          sysActive = false;
+          timers.forEach((t) => { clearTimeout(t); clearInterval(t); });
+          timers = [];
+        };
+
+        drawChart();
+        reqEl.textContent = fmtInt(reqCount);
+
+        if (reduced) {
+          // Static snapshot: full first block, no timers
+          caret.style.display = "none";
+          SCRIPT.slice(0, 2).forEach(({ cmd, out }) => {
+            const c = document.createElement("div");
+            c.className = "t-cmd"; c.textContent = cmd;
+            termLines.appendChild(c);
+            out.forEach((o) => {
+              const ol = document.createElement("div");
+              ol.className = o.startsWith("✓") ? "t-out t-ok" : "t-out";
+              ol.textContent = o;
+              termLines.appendChild(ol);
+            });
+          });
+          for (let i = 0; i < 4; i++) pushLog();
+        } else {
+          new IntersectionObserver(([en]) => (en.isIntersecting ? startSys() : stopSys()), { threshold: 0.15 })
+            .observe(consoleEl);
+          // Boot-up: windows assemble
+          gsap.fromTo(consoleEl.querySelectorAll(".con-win"),
+            { autoAlpha: 0, y: 34, scale: 0.97 },
+            {
+              autoAlpha: 1, y: 0, scale: 1, duration: 0.7, stagger: 0.09, ease: "power3.out",
+              scrollTrigger: { trigger: consoleEl, start: "top 80%" }
+            });
+        }
       }
 
       // Contact form sent confirmation
